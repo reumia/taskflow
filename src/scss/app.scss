@@ -1,7 +1,95 @@
 @import 'init/reset';
 @import 'init/variables';
+@import 'init/mixins';
 
 html,
 body {
-	font-family: $font-family;
+  color: $color-font;
+  font-family: $font-family;
+  font-size: $font-size;
+  line-height: $line-height;
+}
+a,
+.link {
+  color: $color-link;
+  &.is-disabled {
+    text-decoration: none;
+    color: inherit;
+    cursor: default;
+  }
+}
+
+.app {
+  padding: $spacing-unit;
+}
+
+.sticker {
+  display: inline-block;
+  width: $font-size-smallest - $font-size-unit;
+  height: $font-size-smallest - $font-size-unit;
+  background-color: $color-font-lightest;
+  vertical-align: middle;
+}
+
+.list {
+  &.list--equal {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    .list__item {
+      position: relative;
+      display: table-cell;
+      padding: $spacing-unit-half $spacing-unit;
+    }
+  }
+}
+
+.progress {
+  .list__item {
+    font-size: $font-size-largest;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+}
+
+.task {
+  @include border-unit();
+  margin: $spacing-unit-half 0;
+  padding: $spacing-unit-half;
+  cursor: pointer;
+  transition: border 0.1s, background 0.1s;
+  .task__category {
+    margin-bottom: $spacing-unit-half / 2;
+    color: $color-font-lightest;
+    font-size: $font-size-smallest;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  .task__title {
+    @include ellipsis();
+    margin-bottom: $spacing-unit-half;
+    font-weight: bold;
+  }
+  .task__deploy,
+  .task__origin,
+  .task__detail {
+    color: $color-font-lighter;
+    font-size: $font-size-smaller;
+    i {
+      display: inline-block;
+      margin-left: $spacing-unit-half;
+    }
+  }
+  .task__detail {
+    .sticker-wrap {
+      display: inline-block;
+      margin-left: $spacing-unit-half;
+      .sticker {
+        margin: 0;
+      }
+    }
+  }
+  &:hover {
+    background-color: #fcfcfc;
+  }
 }

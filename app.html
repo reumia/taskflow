@@ -1,14 +1,76 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title>NTS Workflow Management Toolkit</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
     <link rel="stylesheet" href="src/css/app.css">
-  	<script src="src/js/jquery-1.12.0.min.js"></script>
-  	<script src="src/js/app.js"></script>
-  </head>
-  <body class="app">
-  </body>
-  <script src="src/js/livereload.js"></script>
+    <script src="src/js/jquery-1.12.0.min.js"></script>
+    <script src="src/js/app.js"></script>
+</head>
+<body class="app">
+<header class="app-header">
+    <div class="list list--equal progress">
+        <span class="list__item">Todo</span>
+        <span class="list__item">In Progress</span>
+        <span class="list__item">Done</span>
+        <span class="list__item">Next</span>
+    </div>
+</header>
+<section class="app-body">
+    <div class="list list--equal">
+        <div class="list__item task-wrap">
+            <article class="task" data-category="GRAFOLIO">
+                <h3 class="task__category" style="color:#0067c0">
+                    <i class="sticker" style="background-color:#0076c0"></i>
+                    <em>GRAFOLIO</em>
+                </h3>
+
+                <h2 class="task__title">[기타] 다이어리 팝업에서 제목 표시줄에 있는 아이콘이 기본 브라우저 아이콘으로 노출됨</h2>
+
+                <div class="task__deploy">배포 <i>미정</i></div>
+                <div class="task__origin">출처 <i>E-mail</i></div>
+                <div class="task__detail">
+                    상세
+                    <div class="sticker-wrap">
+                        <i class="sticker"></i>
+                        <i class="sticker"></i>
+                        <i class="sticker"></i>
+                        <i class="sticker"></i>
+                        <i class="sticker"></i>
+                        <i class="sticker"></i>
+                    </div>
+                </div>
+            </article>
+            <article class="task" data-category="NONE">
+                <h3 class="task__category">
+                    <i class="sticker"></i>
+                    <em>NONE</em>
+                </h3>
+
+                <h2 class="task__title">Task Title</h2>
+
+                <div class="task__deploy">배포 <i>2월 18일</i></div>
+                <div class="task__origin">출처 <i>GRAFOLIO-3000</i></div>
+                <div class="task__detail">
+                    상세
+                    <div class="sticker-wrap">
+                        <i class="sticker"></i>
+                        <i class="sticker"></i>
+                        <i class="sticker"></i>
+                    </div>
+                </div>
+            </article>
+        </div>
+        <div class="list__item task-wrap">
+        </div>
+        <div class="list__item task-wrap">
+        </div>
+        <div class="list__item task-wrap">
+        </div>
+    </div>
+</section>
+<footer class="app-footer"></footer>
+</body>
+<script src="src/js/livereload.js"></script>
 </html>

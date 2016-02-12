@@ -1,1 +1,19 @@
-$font-family: sans-serif;
+$font-family: Helvetica, sans-serif;
+$font-size: 14px;
+$font-size-unit: 2px;
+$font-size-smaller: $font-size - $font-size-unit;
+$font-size-smallest: $font-size - ($font-size-unit * 2);
+$font-size-larger: $font-size + $font-size-unit;
+$font-size-largest: $font-size + ($font-size-unit * 2);
+$line-height: 1.4;
+
+$color-brand: royalblue;
+$color-font: #444;
+$color-font-lighter: lighten($color-font, 30);
+$color-font-lightest: lighten($color-font, 60);
+$color-link: $color-brand;
+$color-border: #d3d3d3;
+
+
+$spacing-unit: 20px;
+$spacing-unit-half: $spacing-unit / 2;

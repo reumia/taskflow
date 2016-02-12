@@ -1,0 +1,11 @@
+@mixin border-unit($width:1px, $color:$color-border, $style:solid){
+  border-width: $width;
+  border-style: $style;
+  border-color: $color;
+}
+
+@mixin ellipsis(){
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
