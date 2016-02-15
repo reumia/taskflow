@@ -28,7 +28,7 @@ a,
   width: $font-size-smallest - $font-size-unit;
   height: $font-size-smallest - $font-size-unit;
   background-color: $color-font-lightest;
-  vertical-align: middle;
+  vertical-align: baseline;
 }
 
 .list {
@@ -64,6 +64,9 @@ a,
     font-size: $font-size-smallest;
     font-weight: bold;
     text-transform: uppercase;
+    .sticker {
+      margin-right: 4px;
+    }
   }
   .task__title {
     @include ellipsis();
@@ -83,9 +86,10 @@ a,
   .task__detail {
     .sticker-wrap {
       display: inline-block;
-      margin-left: $spacing-unit-half;
       .sticker {
-        margin: 0;
+        & + .sticker {
+          margin-left: 4px;
+        }
       }
     }
   }

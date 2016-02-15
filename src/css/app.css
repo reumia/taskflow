@@ -59,7 +59,7 @@ a,
   width: 8px;
   height: 8px;
   background-color: #dddddd;
-  vertical-align: middle; }
+  vertical-align: baseline; }
 
 .list.list--equal {
   display: table;
@@ -89,6 +89,8 @@ a,
     font-size: 10px;
     font-weight: bold;
     text-transform: uppercase; }
+    .task .task__category .sticker {
+      margin-right: 4px; }
   .task .task__title {
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -106,10 +108,9 @@ a,
       display: inline-block;
       margin-left: 10px; }
   .task .task__detail .sticker-wrap {
-    display: inline-block;
-    margin-left: 10px; }
-    .task .task__detail .sticker-wrap .sticker {
-      margin: 0; }
+    display: inline-block; }
+    .task .task__detail .sticker-wrap .sticker + .sticker {
+      margin-left: 4px; }
   .task:hover {
     background-color: #fcfcfc; }
 
