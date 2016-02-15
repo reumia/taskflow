@@ -3,6 +3,7 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
+var server = require('gulp-webserver');
 
 gulp.task('sass', function() {
     return gulp.src('./src/scss/app.scss')
@@ -16,4 +17,15 @@ gulp.task('watch', function() {
     gulp.watch('./src/scss/**/*.scss', ['sass']);
 });
 
-gulp.task('default', ['watch']);
+gulp.task('server', function() {
+    gulp.src('./')
+        .pipe(server({
+            livereload: false,
+            directoryListing: false,
+            open: false,
+            port: '3000',
+            fallback: 'app.html'
+        }));
+});
+
+gulp.task('default', ['server','watch']);
