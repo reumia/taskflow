@@ -1,0 +1,33 @@
+.taskflow {
+  position: relative;
+  height: 100%;
+  .taskflow__aside {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: 100%;
+    box-sizing: border-box;
+    padding: $spacing-unit $spacing-unit;
+    width: $aside-width;
+    background-color: $color-background;
+    @include border-unit(0 1px 0 0);
+  }
+  .taskflow__body {
+    display: table;
+    table-layout: fixed;
+    box-sizing: border-box;
+    padding: $spacing-unit-half $spacing-unit-half $spacing-unit-half ($aside-width+($spacing-unit/4*3));
+    width: 100%;
+    .task-wrap {
+      position: relative;
+      display: table-cell;
+      padding: $spacing-unit-half ($spacing-unit-half/2);
+    }
+    .task-statement {
+      margin-bottom: $spacing-unit;
+      font-size: $font-size-largest;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  }
+}

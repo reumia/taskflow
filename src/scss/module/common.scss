@@ -1,0 +1,21 @@
+html,
+body {
+  color: $color-font;
+  font-family: $font-family;
+  font-size: $font-size;
+  line-height: $line-height;
+}
+html,
+body,
+#content {
+  height: 100%;
+}
+a,
+.link {
+  color: $color-link;
+  &.is-disabled {
+    text-decoration: none;
+    color: inherit;
+    cursor: default;
+  }
+}

@@ -63,16 +63,75 @@ a,
   background-color: #dddddd;
   vertical-align: baseline; }
 
+.button {
+  border-width: 1px;
+  border-style: solid;
+  border-color: #d3d3d3;
+  transition: border 0.1s, background 0.1s, color 0.1s;
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 10px;
+  background-color: #fff;
+  color: #919191;
+  font-size: 14px;
+  line-height: inherit;
+  text-decoration: none;
+  outline: none;
+  cursor: pointer; }
+  .button:hover {
+    color: #444;
+    border-color: #919191;
+    background-color: #fcfcfc; }
+  .button.active {
+    color: royalblue;
+    border-color: royalblue;
+    background-color: #f6f8fe; }
+
+.button--block {
+  display: block; }
+
+input.button--block {
+  width: 100%; }
+
+.button-wrap {
+  display: table;
+  border-width: 0 0 0 1px;
+  border-style: solid;
+  border-color: #d3d3d3;
+  width: 100%;
+  margin-bottom: 5px; }
+  .button-wrap .button {
+    position: relative;
+    display: table-cell;
+    border-width: 1px 1px 1px 0;
+    text-align: center; }
+    .button-wrap .button:before {
+      content: "";
+      position: absolute;
+      top: -1px;
+      bottom: -1px;
+      left: -1px;
+      right: -1px;
+      border-width: 1px;
+      border-style: solid;
+      border-color: #919191;
+      transition: opacity 0.1s;
+      opacity: 0; }
+    .button-wrap .button.active:before, .button-wrap .button:hover:before {
+      opacity: 1; }
+    .button-wrap .button.active:before {
+      border-color: royalblue; }
+
 .taskflow {
   position: relative;
   height: 100%; }
   .taskflow .taskflow__aside {
     position: absolute;
     top: 0;
-    bottom: 0;
     left: 0;
+    min-height: 100%;
     box-sizing: border-box;
-    padding: 20px 30px;
+    padding: 20px 20px;
     width: 350px;
     background-color: #f3f3f3;
     border-width: 0 1px 0 0;
@@ -82,12 +141,12 @@ a,
     display: table;
     table-layout: fixed;
     box-sizing: border-box;
-    padding: 10px 10px 10px 370px;
+    padding: 10px 10px 10px 365px;
     width: 100%; }
     .taskflow .taskflow__body .task-wrap {
       position: relative;
       display: table-cell;
-      padding: 10px 10px; }
+      padding: 10px 5px; }
     .taskflow .taskflow__body .task-statement {
       margin-bottom: 20px;
       font-size: 18px;
@@ -106,41 +165,6 @@ a,
   font-weight: bold;
   text-transform: uppercase; }
 
-.editor .editor__button {
-  border-width: 1px;
-  border-style: solid;
-  border-color: #d3d3d3;
-  transition: border 0.1s, background 0.1s, color 0.1s;
-  display: inline-block;
-  box-sizing: border-box;
-  padding: 10px;
-  background-color: #fff;
-  color: #919191;
-  font-size: 12px;
-  line-height: inherit;
-  text-decoration: none;
-  outline: none;
-  cursor: pointer; }
-  .editor .editor__button:hover {
-    color: #444;
-    border-color: #919191;
-    background-color: #fcfcfc; }
-  .editor .editor__button.active {
-    color: royalblue;
-    border-color: royalblue;
-    background-color: #f6f8fe; }
-
-.editor .editor__button--block {
-  display: block; }
-
-.editor input.editor__button--block {
-  width: 100%; }
-
-.editor .button-wrap {
-  margin-bottom: 5px; }
-  .editor .button-wrap .editor__button + .editor__button {
-    margin-left: 5px; }
-
 .editor .editor__section {
   border-width: 1px 1px 1px 0;
   border-style: solid;
@@ -153,7 +177,7 @@ a,
     border-width: 0 0 0 1px;
     border-style: solid;
     border-color: #d3d3d3; }
-  .editor .editor__section .editor__button--block {
+  .editor .editor__section .button--block {
     margin: 0 -1px 0 0;
     text-align: center; }
 
@@ -190,17 +214,33 @@ a,
   .editor .editor__input.active,
   .editor .editor__select.active,
   .editor .editor__item.active {
-    position: relative;
     border-color: royalblue;
     color: royalblue;
     background-color: #f6f8fe; }
-    .editor .editor__textarea.active:before,
-    .editor .editor__input.active:before,
-    .editor .editor__select.active:before,
-    .editor .editor__item.active:before {
-      content: "\2713";
-      position: absolute;
-      left: -15px; }
+
+.editor .editor__item {
+  position: relative; }
+  .editor .editor__item:before {
+    content: "\22c1";
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: -14px;
+    width: 14px;
+    padding: 1px 0 2px;
+    border-radius: 7px 0 0 7px;
+    color: royalblue;
+    background-color: #fff;
+    border-width: 1px;
+    border-style: solid;
+    border-color: royalblue;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.1s; }
+  .editor .editor__item.active:before {
+    opacity: 1; }
 
 .editor .editor__textarea {
   resize: none; }
@@ -242,6 +282,6 @@ a,
     .task .task__detail .sticker-wrap .sticker + .sticker {
       margin-left: 4px; }
   .task:hover {
-    background-color: #f3f3f3; }
+    background-color: #fcfcfc; }
 
 /*# sourceMappingURL=maps/app.css.map */

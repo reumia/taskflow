@@ -1,0 +1,45 @@
+.task {
+  @include border-unit();
+  @include transition();
+  margin: $spacing-unit-half 0;
+  padding: $spacing-unit-half;
+  cursor: pointer;
+  .task__category {
+    margin-bottom: $spacing-unit-half / 2;
+    color: $color-font-lightest;
+    font-size: $font-size-smallest;
+    font-weight: bold;
+    text-transform: uppercase;
+    .sticker {
+      margin-right: 4px;
+    }
+  }
+  .task__title {
+    @include ellipsis();
+    margin-bottom: $spacing-unit-half;
+    font-weight: bold;
+  }
+  .task__deploy,
+  .task__origin,
+  .task__detail {
+    color: $color-font-lighter;
+    font-size: $font-size-smaller;
+    i {
+      display: inline-block;
+      margin-left: $spacing-unit-half;
+    }
+  }
+  .task__detail {
+    .sticker-wrap {
+      display: inline-block;
+      .sticker {
+        & + .sticker {
+          margin-left: 4px;
+        }
+      }
+    }
+  }
+  &:hover {
+    background-color: $color-background-hover;
+  }
+}

@@ -1,0 +1,72 @@
+.sticker {
+  display: inline-block;
+  width: $font-size-smallest - $font-size-unit;
+  height: $font-size-smallest - $font-size-unit;
+  background-color: $color-font-lightest;
+  vertical-align: baseline;
+}
+
+.button {
+  @include border-unit();
+  @include transition();
+  display: inline-block;
+  box-sizing: border-box;
+  padding: $spacing-unit-half;
+  background-color: #fff;
+  color: $color-font-lighter;
+  font-size: $font-size;
+  line-height: inherit;
+  text-decoration: none;
+  outline: none;
+  cursor: pointer;
+  &:hover {
+    color: $color-font;
+    border-color: $color-font-lighter;
+    background-color: $color-background-hover;
+  }
+  &.active {
+    color: $color-brand;
+    border-color: $color-brand;
+    background-color: $color-brand-lighter;
+  }
+}
+.button--block {
+  display: block;
+}
+input.button--block {
+  width: 100%;
+}
+.button-wrap {
+  display: table;
+  @include border-unit(0 0 0 1px);
+  width: 100%;
+  margin-bottom: $spacing-unit-half / 2;
+  .button {
+    position: relative;
+    display: table-cell;
+    border-width: 1px 1px 1px 0;
+    text-align: center;
+    &:before {
+      content: "";
+      position: absolute;
+      top: -1px;
+      bottom: -1px;
+      left: -1px;
+      right: -1px;
+      @include border-unit(1px, $color-font-lighter);
+      transition: opacity 0.1s;
+      opacity: 0;
+    }
+    &.active,
+    &:hover {
+      &:before {
+        opacity: 1;
+      }
+    }
+    &.active {
+      &:before {
+        border-color: $color-brand;
+      }
+    }
+  }
+}

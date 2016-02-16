@@ -1,0 +1,87 @@
+.editor {
+  hr {
+    @include border-unit(1px 0 0, lighten($color-border, 5), dashed);
+    margin: $spacing-unit-half 0;
+  }
+  .editor__title {
+    margin-bottom: $spacing-unit;
+    font-size: $font-size-largest;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  .editor__section {
+    @include border-unit(1px 1px 1px 0);
+    margin: $spacing-unit-half 0;
+    .editor__textarea,
+    .editor__input,
+    .editor__select,
+    .editor__item {
+      @include border-unit(0 0 0 1px);
+    }
+    .button--block {
+      margin: 0 -1px 0 0;
+      text-align: center;
+    }
+  }
+  .editor__textarea,
+  .editor__input,
+  .editor__select,
+  .editor__item {
+    @include border-unit();
+    @include transition();
+    display: block;
+    box-sizing: border-box;
+    border-radius: 0;
+    padding: $spacing-unit-half;
+    width: 100%;
+    background-color: #fff;
+    font-size: $font-size;
+    color: $color-font-lighter;
+    outline: none;
+    text-decoration: none;
+    -webkit-appearance: none;
+    &:focus,
+    &:hover {
+      border-color: $color-font-lighter;
+      color: $color-font;
+      background-color: $color-background-hover;
+    }
+    &.active {
+      border-color: $color-brand;
+      color: $color-brand;
+      background-color: $color-brand-lighter;
+    }
+  }
+  .editor__item {
+    position: relative;
+    &:before {
+      content: "\22c1";
+      box-sizing: border-box;
+      position: absolute;
+      top: 0;
+      left: -($checkbox-unit);
+      width: $checkbox-unit;
+      padding: 1px 0 2px;
+      border-radius: ($checkbox-unit/2) 0 0 ($checkbox-unit/2);
+      color: $color-brand;
+      background-color: #fff;
+      @include border-unit(1px, $color-brand);
+      font-size: $font-size-smallest;
+      font-weight: bold;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.1s;
+    }
+    &.active {
+      &:before {
+        opacity: 1;
+      }
+    }
+  }
+  .editor__textarea {
+    resize: none;
+  }
+  .editor__table {
+
+  }
+}

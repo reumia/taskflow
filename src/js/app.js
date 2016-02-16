@@ -16,40 +16,29 @@ var Task = React.createClass({
         var inlineStyleColor = {color: data.categoryColor};
         var inlineStyleBackgroundColor = {backgroundColor: data.categoryColor};
         var deployDate = this.getDateByTimeStamp(data.deploy);
+        var stickerNodes = data.detail.map(function (sticker) {
+            return (
+                <i className="sticker" data-checked={sticker.checked} data-text={sticker.text}></i>
+            );
+        });
         return (
             <article className="task" onClick={this.handleClick}>
                 <h3 className="task__category" style={inlineStyleColor}>
                     <i className="sticker" style={inlineStyleBackgroundColor}></i>
                     <em>{data.category}</em>
                 </h3>
-
                 <h2 className="task__title">{data.title}</h2>
-
-                <div className="task__deploy">
-                    배포
-                    <i>{deployDate}</i>
-                </div>
-                <div className="task__origin">
-                    출처
-                    <i>{data.origin}</i>
-                </div>
-                <div className="task__detail">
-                    상세
+                <div className="task__deploy">배포<i>{deployDate}</i></div>
+                <div className="task__origin">출처<i>{data.origin}</i></div>
+                <div className="task__detail">상세
                     <div className="sticker-wrap">
-                        <i className="sticker"></i>
-                        <i className="sticker"></i>
-                        <i className="sticker"></i>
-                        <i className="sticker"></i>
-                        <i className="sticker"></i>
-                        <i className="sticker"></i>
+                        {stickerNodes}
                     </div>
                 </div>
             </article>
         );
     }
 });
-
-
 
 // TaskWrap
 var TaskWrap = React.createClass({
@@ -97,13 +86,7 @@ var TaskEditor = React.createClass({
         return (
             <form className="editor">
                 <h2 className="editor__title">Edit Task</h2>
-                <section className="button-wrap">
-                    <a href="#" className="editor__button active">TODO</a>
-                    <a href="#" className="editor__button">IN PROGRESS</a>
-                    <a href="#" className="editor__button">DONE</a>
-                    <a href="#" className="editor__button">NEXT</a>
-                </section>
-                <hr />
+                /* Todo : 카테고리 선택 UI */
                 <section className="editor__section">
                     <select className="editor__select" name="" id="">
                         <option value="">AA</option>
@@ -111,26 +94,23 @@ var TaskEditor = React.createClass({
                         <option value="">CC</option>
                     </select>
                 </section>
-                <hr />
                 <section className="editor__section">
                     <textarea className="editor__textarea" name="" id="" cols="30" rows="4" placeholder="제목" />
                     <input className="editor__input" type="text" placeholder="배포 20160218" />
                     <input className="editor__input" type="text" placeholder="출처 GRAFOLIO-3000" />
                 </section>
-                <hr />
                 <section className="editor__section">
-                    <input type="text" className="editor__input" placholder="" />
-                    <a href="#" className="editor__button editor__button--block">추가</a>
-                    <a href="#" className="editor__item">asdasd</a>
+                    <input type="text" className="editor__input" placeholder="상세" />
+                    <a href="#" className="button button--block">추가</a>
                     <a href="#" className="editor__item">asdasd</a>
                     <a href="#" className="editor__item">asdasd</a>
                     <a href="#" className="editor__item active">asdasd</a>
+                    <a href="#" className="editor__item active">asdaksjdfljasldfjlaksjdflkjasl jdflkjasldfjlkasjfjkasd</a>
                     <a href="#" className="editor__item">asdasd</a>
                 </section>
-                <hr/>
                 <div className="button-wrap">
-                    <input type="submit" className="editor__button" value="추가" />
-                    <input type="reset" className="editor__button" value="취소" />
+                    <a href="#" className="button">추가</a>
+                    <a href="#" className="button">취소</a>
                 </div>
             </form>
         );
@@ -140,6 +120,7 @@ var TaskEditor = React.createClass({
 // TaskFlow
 var TaskFlow = React.createClass({
     loadTasksFromStorage: function () {
+        console.log("Data Loaded");
         this.setState({data: this.props.data});
     },
     getInitialState: function () {
@@ -147,6 +128,7 @@ var TaskFlow = React.createClass({
     },
     componentDidMount: function () {
         this.loadTasksFromStorage();
+        setInterval(this.loadTasksFromStorage, this.props.pollInterval);
     },
     render: function () {
         var data = this.props.data;
