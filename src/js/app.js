@@ -54,11 +54,28 @@ var Task = React.createClass({
 // TaskWrap
 var TaskWrap = React.createClass({
     getInitialState: function () {
-        return {data: []}
+        return {data: []};
+    },
+    getStatement: function(num) {
+        switch (parseInt(num)) {
+            case 0:
+                return "TODO";
+                break;
+            case 1:
+                return "IN PROGRESS";
+                break;
+            case 2:
+                return "DONE";
+                break;
+            case 3:
+                return "NEXT";
+                break;
+        }
     },
     render: function () {
         var data = this.props.data;
         var event = this.handleClickTask;
+        var statement = this.getStatement(this.props.statement);
         var taskNodes = Object.keys(data).map(function (key) {
             var item = data[key];
             return (
@@ -66,9 +83,56 @@ var TaskWrap = React.createClass({
             );
         });
         return (
-            <div className="task-wrap list__item">
+            <div className="task-wrap">
+                <h2 className="task-statement">{statement}</h2>
                 {taskNodes}
             </div>
+        );
+    }
+});
+
+// TaskEditor
+var TaskEditor = React.createClass({
+    render: function () {
+        return (
+            <form className="editor">
+                <h2 className="editor__title">Edit Task</h2>
+                <section className="button-wrap">
+                    <a href="#" className="editor__button active">TODO</a>
+                    <a href="#" className="editor__button">IN PROGRESS</a>
+                    <a href="#" className="editor__button">DONE</a>
+                    <a href="#" className="editor__button">NEXT</a>
+                </section>
+                <hr />
+                <section className="editor__section">
+                    <select className="editor__select" name="" id="">
+                        <option value="">AA</option>
+                        <option value="">BB</option>
+                        <option value="">CC</option>
+                    </select>
+                </section>
+                <hr />
+                <section className="editor__section">
+                    <textarea className="editor__textarea" name="" id="" cols="30" rows="4" placeholder="제목" />
+                    <input className="editor__input" type="text" placeholder="배포 20160218" />
+                    <input className="editor__input" type="text" placeholder="출처 GRAFOLIO-3000" />
+                </section>
+                <hr />
+                <section className="editor__section">
+                    <input type="text" className="editor__input" placholder="" />
+                    <a href="#" className="editor__button editor__button--block">추가</a>
+                    <a href="#" className="editor__item">asdasd</a>
+                    <a href="#" className="editor__item">asdasd</a>
+                    <a href="#" className="editor__item">asdasd</a>
+                    <a href="#" className="editor__item active">asdasd</a>
+                    <a href="#" className="editor__item">asdasd</a>
+                </section>
+                <hr/>
+                <div className="button-wrap">
+                    <input type="submit" className="editor__button" value="추가" />
+                    <input type="reset" className="editor__button" value="취소" />
+                </div>
+            </form>
         );
     }
 });
@@ -93,8 +157,9 @@ var TaskFlow = React.createClass({
             );
         });
         return (
-            <div className="taskflow list list--equal">
-                {taskWrapNodes}
+            <div className="taskflow">
+                <aside className="taskflow__aside"><TaskEditor /></aside>
+                <section className="taskflow__body">{taskWrapNodes}</section>
             </div>
         );
     }

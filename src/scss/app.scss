@@ -9,6 +9,11 @@ body {
   font-size: $font-size;
   line-height: $line-height;
 }
+html,
+body,
+#content {
+  height: 100%;
+}
 a,
 .link {
   color: $color-link;
@@ -19,10 +24,6 @@ a,
   }
 }
 
-.app {
-  padding: $spacing-unit;
-}
-
 .sticker {
   display: inline-block;
   width: $font-size-smallest - $font-size-unit;
@@ -31,33 +32,150 @@ a,
   vertical-align: baseline;
 }
 
-.list {
-  &.list--equal {
+.taskflow {
+  position: relative;
+  height: 100%;
+  .taskflow__aside {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    box-sizing: border-box;
+    padding: $spacing-unit $spacing-unit+$spacing-unit-half;
+    width: $aside-width;
+    background-color: $color-background;
+    @include border-unit(0 1px 0 0);
+  }
+  .taskflow__body {
     display: table;
     table-layout: fixed;
+    box-sizing: border-box;
+    padding: $spacing-unit-half $spacing-unit-half $spacing-unit-half $aside-width+$spacing-unit;
     width: 100%;
-    .list__item {
+    .task-wrap {
       position: relative;
       display: table-cell;
-      padding: $spacing-unit-half $spacing-unit;
+      padding: $spacing-unit-half $spacing-unit-half;
+    }
+    .task-statement {
+      margin-bottom: $spacing-unit;
+      font-size: $font-size-largest;
+      font-weight: bold;
+      text-transform: uppercase;
     }
   }
 }
 
-.progress {
-  .list__item {
+.editor {
+  hr {
+    @include border-unit(1px 0 0, lighten($color-border, 5), dashed);
+    margin: $spacing-unit-half 0;
+  }
+  .editor__title {
+    margin-bottom: $spacing-unit;
     font-size: $font-size-largest;
     font-weight: bold;
     text-transform: uppercase;
+  }
+  .editor__button {
+    @include border-unit();
+    @include transition();
+    display: inline-block;
+    box-sizing: border-box;
+    padding: $spacing-unit-half;
+    background-color: #fff;
+    color: $color-font-lighter;
+    font-size: $font-size-smaller;
+    line-height: inherit;
+    text-decoration: none;
+    outline: none;
+    cursor: pointer;
+    &:hover {
+      color: $color-font;
+      border-color: $color-font-lighter;
+      background-color: $color-background-hover;
+    }
+    &.active {
+      color: $color-brand;
+      border-color: $color-brand;
+      background-color: $color-brand-lighter;
+    }
+  }
+  .editor__button--block {
+    display: block;
+  }
+  input.editor__button--block {
+    width: 100%;
+  }
+  .button-wrap {
+    margin-bottom: $spacing-unit-half / 2;
+    .editor__button + .editor__button {
+      margin-left: $spacing-unit-half / 2;
+    }
+  }
+  .editor__section {
+    @include border-unit(1px 1px 1px 0);
+    margin: $spacing-unit-half 0;
+    .editor__textarea,
+    .editor__input,
+    .editor__select,
+    .editor__item {
+      @include border-unit(0 0 0 1px);
+    }
+    .editor__button--block {
+      margin: 0 -1px 0 0;
+      text-align: center;
+    }
+  }
+  .editor__textarea,
+  .editor__input,
+  .editor__select,
+  .editor__item {
+    @include border-unit();
+    @include transition();
+    display: block;
+    box-sizing: border-box;
+    border-radius: 0;
+    padding: $spacing-unit-half;
+    width: 100%;
+    background-color: #fff;
+    font-size: $font-size;
+    color: $color-font-lighter;
+    outline: none;
+    text-decoration: none;
+    -webkit-appearance: none;
+    &:focus,
+    &:hover {
+      border-color: $color-font-lighter;
+      color: $color-font;
+      background-color: $color-background-hover;
+    }
+    &.active {
+      position: relative;
+      border-color: $color-brand;
+      color: $color-brand;
+      background-color: $color-brand-lighter;
+      &:before {
+        content: "\2713";
+        position: absolute;
+        left: -($spacing-unit-half + $spacing-unit-half / 2);
+      }
+    }
+  }
+  .editor__textarea {
+    resize: none;
+  }
+  .editor__table {
+
   }
 }
 
 .task {
   @include border-unit();
+  @include transition();
   margin: $spacing-unit-half 0;
   padding: $spacing-unit-half;
   cursor: pointer;
-  transition: border 0.1s, background 0.1s;
   .task__category {
     margin-bottom: $spacing-unit-half / 2;
     color: $color-font-lightest;
@@ -94,6 +212,6 @@ a,
     }
   }
   &:hover {
-    background-color: #fcfcfc;
+    background-color: $color-background;
   }
 }

@@ -1,11 +1,15 @@
-@mixin border-unit($width:1px, $color:$color-border, $style:solid){
+@mixin border-unit ($width:1px, $color:$color-border, $style:solid) {
   border-width: $width;
   border-style: $style;
   border-color: $color;
 }
 
-@mixin ellipsis(){
+@mixin ellipsis () {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+}
+
+@mixin transition () {
+  transition: border 0.1s, background 0.1s, color 0.1s;
 }

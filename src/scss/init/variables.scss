@@ -8,12 +8,16 @@ $font-size-largest: $font-size + ($font-size-unit * 2);
 $line-height: 1.4;
 
 $color-brand: royalblue;
+$color-brand-lighter: lighten($color-brand, 41);
 $color-font: #444;
 $color-font-lighter: lighten($color-font, 30);
 $color-font-lightest: lighten($color-font, 60);
 $color-link: $color-brand;
 $color-border: #d3d3d3;
+$color-background: #f3f3f3;
+$color-background-hover: #fcfcfc;
 
 
+$aside-width: 350px;
 $spacing-unit: 20px;
 $spacing-unit-half: $spacing-unit / 2;
