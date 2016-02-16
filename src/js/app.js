@@ -1,4 +1,4 @@
- // Task
+// Task
 var Task = React.createClass({
     getDateByTimeStamp: function (string) {
         var timestamp = new Date(string);
@@ -22,12 +22,14 @@ var Task = React.createClass({
                     <i className="sticker" style={inlineStyleBackgroundColor}></i>
                     <em>{data.category}</em>
                 </h3>
+
                 <h2 className="task__title">{data.title}</h2>
+
                 <div className="task__deploy">
                     배포
                     <i>{deployDate}</i>
                 </div>
-                <div className="task__origin" >
+                <div className="task__origin">
                     출처
                     <i>{data.origin}</i>
                 </div>
@@ -47,18 +49,20 @@ var Task = React.createClass({
     }
 });
 
+
+
 // TaskWrap
 var TaskWrap = React.createClass({
-    getInitialState: function() {
+    getInitialState: function () {
         return {data: []}
     },
     render: function () {
         var data = this.props.data;
         var event = this.handleClickTask;
-        var taskNodes = Object.keys(data).map(function(key) {
+        var taskNodes = Object.keys(data).map(function (key) {
             var item = data[key];
             return (
-                <Task data={item} statement={key} key={item.date} />
+                <Task data={item} statement={key} key={item.date}/>
             );
         });
         return (
@@ -82,7 +86,7 @@ var TaskFlow = React.createClass({
     },
     render: function () {
         var data = this.props.data;
-        var taskWrapNodes = Object.keys(data).map(function(key) {
+        var taskWrapNodes = Object.keys(data).map(function (key) {
             var item = JSON.parse(data[key]);
             return (
                 <TaskWrap data={item} statement={key} key={key}/>
@@ -101,6 +105,6 @@ var myStorage = window.localStorage;
 
 // Render
 ReactDOM.render(
-    <TaskFlow data={myStorage} pollInterval={3000} />,
+    <TaskFlow data={myStorage} pollInterval={3000}/>,
     document.getElementById('content')
 );
