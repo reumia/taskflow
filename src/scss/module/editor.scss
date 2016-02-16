@@ -58,7 +58,7 @@
       content: "\22c1";
       box-sizing: border-box;
       position: absolute;
-      top: 0;
+      top: $spacing-unit-half;
       left: -($checkbox-unit);
       width: $checkbox-unit;
       padding: 1px 0 2px;

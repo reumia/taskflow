@@ -224,7 +224,7 @@ input.button--block {
     content: "\22c1";
     box-sizing: border-box;
     position: absolute;
-    top: 0;
+    top: 10px;
     left: -14px;
     width: 14px;
     padding: 1px 0 2px;
