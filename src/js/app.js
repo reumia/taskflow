@@ -1,4 +1,4 @@
-// Task
+ // Task
 var Task = React.createClass({
     getDateByTimeStamp: function (string) {
         var timestamp = new Date(string);
@@ -25,10 +25,12 @@ var Task = React.createClass({
                 <h2 className="task__title">{data.title}</h2>
                 <div className="task__deploy">
                     배포
-                    <i>{deployDate}</i></div>
+                    <i>{deployDate}</i>
+                </div>
                 <div className="task__origin" >
                     출처
-                    <i>{data.origin}</i></div>
+                    <i>{data.origin}</i>
+                </div>
                 <div className="task__detail">
                     상세
                     <div className="sticker-wrap">
@@ -81,7 +83,7 @@ var TaskFlow = React.createClass({
     render: function () {
         var data = this.props.data;
         var taskWrapNodes = Object.keys(data).map(function(key) {
-            var item = data[key];
+            var item = JSON.parse(data[key]);
             return (
                 <TaskWrap data={item} statement={key} key={key}/>
             );
@@ -95,18 +97,7 @@ var TaskFlow = React.createClass({
 });
 
 // Set Database
-// var myStorage = window.localStorage;
-var myStorage = {
-    "todo" : [
-        {"date":1455523409565,"category":"GRAFOLIO","categoryColor":"#2ecc71","title":"[기타] 다이어리 팝업에서 제목 표시줄에 있는 아이콘이 기본 브라우저 아이콘으로 노출됨","deploy":1458226800000,"origin":"GRAFOLIO-3000","originLink":"#","detail":["aaa", "bbb"]},
-        {"date":1455523409566,"category":"NONE","categoryColor":"","title":"테스트 ㅎㅎ","deploy":"미정","origin":"E-mail","originLink":"#","detail":["aaa", "bbb", "ccccddd"]}
-    ],
-    "progress" : [
-        {"date":1455523409567,"category":"LINEPLAY-DIARY","categoryColor":"red","title":"하트를 준 아바타 : 아바타 위치 수정","deploy":"미정","origin":"E-mail","originLink":"#","detail":[]}
-    ],
-    "done" : [],
-    "next" : []
-}
+var myStorage = window.localStorage;
 
 // Render
 ReactDOM.render(
