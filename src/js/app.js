@@ -50,8 +50,15 @@ var TaskEditor = React.createClass({
 
 // CategoryEdit
 var CategoryEdit = React.createClass({
-    handleClickButton: function() {
-        console.log('clicked!');
+    getInitialState: function () {
+        return {isActivated: false};
+    },
+    handleClickButton: function (e) {
+        if (this.state.isActivated) {
+            this.setState({isActivated: false});
+        } else {
+            this.setState({isActivated: true});
+        }
     },
     render: function () {
         return (
@@ -60,7 +67,7 @@ var CategoryEdit = React.createClass({
                     <span className="icon icon--caret-down"></span>
                 </a>
                 <input type="text" className="editor__input table__item" placeholder="카테고리" />
-                <CategorySelectbox onClick={this.handleClickButton} />
+                <CategorySelectbox onClick={this.handleClickButton} isActivated={this.state.isActivated} />
             </section>
         );
     }
@@ -82,8 +89,12 @@ var CategorySelectbox = React.createClass({
                 </a>
             );
         });
+        var selectboxClass = classNames({
+            'selectbox': true,
+            'active': this.props.isActivated
+        });
         return (
-            <div className="selectbox">
+            <div className={selectboxClass}>
                 <a href="#" className="selectbox__item"><i className="sticker"></i>NONE</a>
                 {selectboxNodes}
             </div>
