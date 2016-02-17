@@ -302,16 +302,16 @@ input.button--block {
   .editor__section .button--block {
     margin: 0 -1px 0 0;
     text-align: center; }
-  .editor__section.select-category {
+  .editor__section.category {
     position: relative; }
-    .editor__section.select-category .button {
+    .editor__section.category .button {
       width: 42px; }
-    .editor__section.select-category .editor__input {
+    .editor__section.category .editor__input {
       text-align: left;
       border-width: 1px !important;
       margin-left: -1px;
       width: 267px; }
-    .editor__section.select-category .selectbox {
+    .editor__section.category .selectbox {
       position: absolute;
       left: -1px;
       right: 1px;
@@ -319,12 +319,12 @@ input.button--block {
       -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
       -moz-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); }
-      .editor__section.select-category .selectbox .selectbox__item {
+      .editor__section.category .selectbox .selectbox__item {
         color: #dddddd;
         font-size: 10px;
         font-weight: bold;
         text-transform: uppercase; }
-        .editor__section.select-category .selectbox .selectbox__item .sticker {
+        .editor__section.category .selectbox .selectbox__item .sticker {
           margin-right: 4px; }
 
 .task {

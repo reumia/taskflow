@@ -62,7 +62,7 @@ var CategoryEdit = React.createClass({
     },
     render: function () {
         return (
-            <section className="editor__section table select-category">
+            <section className="editor__section table category">
                 <a href="#" className="button table__item" onClick={this.handleClickButton}>
                     <span className="icon icon--caret-down"></span>
                 </a>
@@ -119,18 +119,29 @@ var BasicInfoEdit = React.createClass({
 var DetailEdit = React.createClass({
     render: function () {
         return (
-            <section className="editor__section">
+            <section className="editor__section detail">
                 <input type="text" className="editor__input" placeholder="상세" />
                 <a href="#" className="button button--block">추가</a>
-                <a href="#" className="editor__item">asdasd</a>
-                <a href="#" className="editor__item">asdasd</a>
-                <a href="#" className="editor__item active">asdasd</a>
-                <a href="#" className="editor__item active">asdaksjdfljasldfjlaksjdflkjasl jdflkjasldfjlkasjfjkasd</a>
-                <a href="#" className="editor__item">asdasd</a>
+                <DetailItems />
             </section>
         );
     }
 })
+
+// DetailItem
+var DetailItems = React.createClass({
+    render: function () {
+        return (
+            <div className="detail-group">
+                <a href="#" className="editor__item">asdasd</a>
+                <a href="#" className="editor__item">asdasddd</a>
+                <a href="#" className="editor__item active">asdasd</a>
+                <a href="#" className="editor__item active">asdaksjdfljasldfjlaksjdflkjasl jdflkjasldfjlkasjfjkasd</a>
+                <a href="#" className="editor__item">asdasd</a>
+            </div>
+        );
+    }
+});
 
 // TaskWrap
 var TaskWrap = React.createClass({
