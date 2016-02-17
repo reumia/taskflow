@@ -1,3 +1,4 @@
+// 스티커
 .sticker {
   display: inline-block;
   width: $font-size-smallest - $font-size-unit;
@@ -6,19 +7,15 @@
   vertical-align: baseline;
 }
 
+// 대체텍스트
+.replacement {
+  @include replacement();
+}
+
+// 버튼
 .button {
-  @include border-unit();
-  @include transition();
+  @include form-common();
   display: inline-block;
-  box-sizing: border-box;
-  padding: $spacing-unit-half;
-  background-color: #fff;
-  color: $color-font-lighter;
-  font-size: $font-size;
-  line-height: inherit;
-  text-decoration: none;
-  outline: none;
-  cursor: pointer;
   &:hover {
     color: $color-font;
     border-color: $color-font-lighter;
@@ -36,19 +33,24 @@
 input.button--block {
   width: 100%;
 }
-.button-wrap {
+
+
+// 100% 너비 좌우 정렬
+.table {
   display: table;
-  @include border-unit(0 0 0 1px);
+  table-layout: fixed;
+  @include border-unit(0 0 0 1px!important);
   width: 100%;
-  margin-bottom: $spacing-unit-half / 2;
-  .button {
+  .table__item {
     position: relative;
-    display: table-cell;
-    border-width: 1px 1px 1px 0;
+    display: table-cell!important;
+    border-width: 1px 1px 1px 0!important;
     text-align: center;
+    line-height: $spacing-unit;
     &:before {
       content: "";
       position: absolute;
+      z-index: 10;
       top: -1px;
       bottom: -1px;
       left: -1px;
@@ -68,5 +70,20 @@ input.button--block {
         border-color: $color-brand;
       }
     }
+  }
+}
+
+// 디자인 셀렉트박스
+.selectbox {
+  display: none;
+  @include border-unit(1px 1px 1px 0);
+  .selectbox__item {
+    @include form-common();
+    @include border-unit(0 0 0 1px);
+    display: block;
+    margin-top: -1px;
+  }
+  &.active {
+    display: block;
   }
 }

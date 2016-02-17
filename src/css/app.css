@@ -63,21 +63,37 @@ a,
   background-color: #dddddd;
   vertical-align: baseline; }
 
+.replacement {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden; }
+
 .button {
   border-width: 1px;
   border-style: solid;
   border-color: #d3d3d3;
   transition: border 0.1s, background 0.1s, color 0.1s;
-  display: inline-block;
   box-sizing: border-box;
   padding: 10px;
+  border-radius: 0;
   background-color: #fff;
   color: #919191;
   font-size: 14px;
-  line-height: inherit;
   text-decoration: none;
   outline: none;
-  cursor: pointer; }
+  -webkit-appearance: none;
+  display: inline-block; }
+  .button:hover {
+    color: #444;
+    border-color: #919191;
+    background-color: #fcfcfc; }
+  .button.active {
+    color: royalblue;
+    border-color: royalblue;
+    background-color: #f6f8fe; }
   .button:hover {
     color: #444;
     border-color: #919191;
@@ -93,21 +109,23 @@ a,
 input.button--block {
   width: 100%; }
 
-.button-wrap {
+.table {
   display: table;
-  border-width: 0 0 0 1px;
+  table-layout: fixed;
+  border-width: 0 0 0 1px !important;
   border-style: solid;
   border-color: #d3d3d3;
-  width: 100%;
-  margin-bottom: 5px; }
-  .button-wrap .button {
+  width: 100%; }
+  .table .table__item {
     position: relative;
-    display: table-cell;
-    border-width: 1px 1px 1px 0;
-    text-align: center; }
-    .button-wrap .button:before {
+    display: table-cell !important;
+    border-width: 1px 1px 1px 0 !important;
+    text-align: center;
+    line-height: 20px; }
+    .table .table__item:before {
       content: "";
       position: absolute;
+      z-index: 10;
       top: -1px;
       bottom: -1px;
       left: -1px;
@@ -117,10 +135,54 @@ input.button--block {
       border-color: #919191;
       transition: opacity 0.1s;
       opacity: 0; }
-    .button-wrap .button.active:before, .button-wrap .button:hover:before {
+    .table .table__item.active:before, .table .table__item:hover:before {
       opacity: 1; }
-    .button-wrap .button.active:before {
+    .table .table__item.active:before {
       border-color: royalblue; }
+
+.selectbox {
+  display: none;
+  border-width: 1px 1px 1px 0;
+  border-style: solid;
+  border-color: #d3d3d3; }
+  .selectbox .selectbox__item {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #d3d3d3;
+    transition: border 0.1s, background 0.1s, color 0.1s;
+    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 0;
+    background-color: #fff;
+    color: #919191;
+    font-size: 14px;
+    text-decoration: none;
+    outline: none;
+    -webkit-appearance: none;
+    border-width: 0 0 0 1px;
+    border-style: solid;
+    border-color: #d3d3d3;
+    display: block;
+    margin-top: -1px; }
+    .selectbox .selectbox__item:hover {
+      color: #444;
+      border-color: #919191;
+      background-color: #fcfcfc; }
+    .selectbox .selectbox__item.active {
+      color: royalblue;
+      border-color: royalblue;
+      background-color: #f6f8fe; }
+  .selectbox.active {
+    display: block; }
+
+.icon:before {
+  display: inline-block; }
+
+.icon--caret-down:before {
+  content: "\25bd"; }
+
+.icon--add:before {
+  content: "\002b"; }
 
 .taskflow {
   position: relative;
@@ -165,57 +227,37 @@ input.button--block {
   font-weight: bold;
   text-transform: uppercase; }
 
-.editor .editor__section {
-  border-width: 1px 1px 1px 0;
-  border-style: solid;
-  border-color: #d3d3d3;
-  margin: 10px 0; }
-  .editor .editor__section .editor__textarea,
-  .editor .editor__section .editor__input,
-  .editor .editor__section .editor__select,
-  .editor .editor__section .editor__item {
-    border-width: 0 0 0 1px;
-    border-style: solid;
-    border-color: #d3d3d3; }
-  .editor .editor__section .button--block {
-    margin: 0 -1px 0 0;
-    text-align: center; }
-
 .editor .editor__textarea,
 .editor .editor__input,
-.editor .editor__select,
 .editor .editor__item {
   border-width: 1px;
   border-style: solid;
   border-color: #d3d3d3;
   transition: border 0.1s, background 0.1s, color 0.1s;
-  display: block;
   box-sizing: border-box;
-  border-radius: 0;
   padding: 10px;
-  width: 100%;
+  border-radius: 0;
   background-color: #fff;
-  font-size: 14px;
   color: #919191;
-  outline: none;
+  font-size: 14px;
   text-decoration: none;
-  -webkit-appearance: none; }
+  outline: none;
+  -webkit-appearance: none;
+  display: block;
+  width: 100%; }
   .editor .editor__textarea:focus, .editor .editor__textarea:hover,
   .editor .editor__input:focus,
   .editor .editor__input:hover,
-  .editor .editor__select:focus,
-  .editor .editor__select:hover,
   .editor .editor__item:focus,
   .editor .editor__item:hover {
-    border-color: #919191;
     color: #444;
+    border-color: #919191;
     background-color: #fcfcfc; }
   .editor .editor__textarea.active,
   .editor .editor__input.active,
-  .editor .editor__select.active,
   .editor .editor__item.active {
-    border-color: royalblue;
     color: royalblue;
+    border-color: royalblue;
     background-color: #f6f8fe; }
 
 .editor .editor__item {
@@ -244,6 +286,46 @@ input.button--block {
 
 .editor .editor__textarea {
   resize: none; }
+
+.editor__section {
+  border-width: 1px 1px 1px 0;
+  border-style: solid;
+  border-color: #d3d3d3;
+  margin: 10px 0; }
+  .editor__section .editor__textarea,
+  .editor__section .editor__input,
+  .editor__section .editor__select,
+  .editor__section .editor__item {
+    border-width: 0 0 0 1px;
+    border-style: solid;
+    border-color: #d3d3d3; }
+  .editor__section .button--block {
+    margin: 0 -1px 0 0;
+    text-align: center; }
+  .editor__section.select-category {
+    position: relative; }
+    .editor__section.select-category .button {
+      width: 42px; }
+    .editor__section.select-category .editor__input {
+      text-align: left;
+      border-width: 1px !important;
+      margin-left: -1px;
+      width: 267px; }
+    .editor__section.select-category .selectbox {
+      position: absolute;
+      left: -1px;
+      right: 1px;
+      z-index: 100;
+      -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      -moz-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); }
+      .editor__section.select-category .selectbox .selectbox__item {
+        color: #dddddd;
+        font-size: 10px;
+        font-weight: bold;
+        text-transform: uppercase; }
+        .editor__section.select-category .selectbox .selectbox__item .sticker {
+          margin-right: 4px; }
 
 .task {
   border-width: 1px;

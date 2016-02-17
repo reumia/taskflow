@@ -13,3 +13,52 @@
 @mixin transition () {
   transition: border 0.1s, background 0.1s, color 0.1s;
 }
+
+@mixin replacement () {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+}
+
+@mixin box-shadow() {
+  -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+@mixin form-common ($type:button) {
+  @include border-unit();
+  @include transition();
+  box-sizing: border-box;
+  padding: $spacing-unit-half;
+  border-radius: 0;
+  background-color: #fff;
+  color: $color-font-lighter;
+  font-size: $font-size;
+  text-decoration: none;
+  outline: none;
+  -webkit-appearance: none;
+  @if $type == button {
+    &:hover {
+      color: $color-font;
+      border-color: $color-font-lighter;
+      background-color: $color-background-hover;
+    }
+  }
+  @elseif $type == input {
+    &:focus,
+    &:hover {
+      color: $color-font;
+      border-color: $color-font-lighter;
+      background-color: $color-background-hover;
+    }
+  }
+  &.active {
+     color: $color-brand;
+     border-color: $color-brand;
+     background-color: $color-brand-lighter;
+  }
+}

@@ -3,7 +3,7 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
-var server = require('gulp-webserver');
+var webserver = require('gulp-webserver');
 
 gulp.task('sass', function() {
     return gulp.src('./src/scss/app.scss')
@@ -19,7 +19,7 @@ gulp.task('watch', function() {
 
 gulp.task('server', function() {
     gulp.src('./')
-        .pipe(server({
+        .pipe(webserver({
             livereload: false,
             directoryListing: false,
             open: false,

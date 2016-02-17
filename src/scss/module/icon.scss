@@ -1,0 +1,16 @@
+.icon {
+  &:before {
+    display: inline-block;
+  }
+}
+
+.icon--caret-down {
+  &:before {
+    content: "\25bd";
+  }
+}
+.icon--add {
+  &:before {
+    content: "\002b";
+  }
+}
