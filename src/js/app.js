@@ -1,3 +1,5 @@
+var classNames = require('classnames');
+
 // TaskFlow
 var TaskFlow = React.createClass({
     loadTasksFromStorage: function () {
