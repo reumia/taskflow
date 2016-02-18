@@ -18,7 +18,7 @@ var TaskFlow = React.createClass({
         var taskWrapNodes = Object.keys(data).map(function (key) {
             var item = JSON.parse(data[key]);
             return (
-                <TaskWrap data={item} statement={key} key={key}/>
+                <TaskWrap data={item} statement={key} key={key} />
             );
         });
         return (
@@ -54,6 +54,7 @@ var CategoryEdit = React.createClass({
         return {isActivated: false};
     },
     handleClickButton: function (e) {
+        e.preventDefault();
         if (this.state.isActivated) {
             this.setState({isActivated: false});
         } else {
@@ -131,14 +132,39 @@ var DetailEdit = React.createClass({
 // DetailItem
 var DetailItems = React.createClass({
     render: function () {
+        var detailItemNodes = [0,1,2].map(function(detailItem){
+            return (
+                <DetailItem />
+            );
+        });
         return (
             <div className="detail-group">
-                <a href="#" className="editor__item">asdasd</a>
-                <a href="#" className="editor__item">asdasddd</a>
-                <a href="#" className="editor__item active">asdasd</a>
-                <a href="#" className="editor__item active">asdaksjdfljasldfjlaksjdflkjasl jdflkjasldfjlkasjfjkasd</a>
-                <a href="#" className="editor__item">asdasd</a>
+                {detailItemNodes}
             </div>
+        );
+    }
+});
+
+// DetailItem
+var DetailItem = React.createClass({
+    getInitialState: function () {
+        return {isActivated: false};
+    },
+    handleClickItem: function (e) {
+        e.preventDefault();
+        if (this.state.isActivated) {
+            this.setState({isActivated: false});
+        } else {
+            this.setState({isActivated: true});
+        }
+    },
+    render: function () {
+        var detailItemClasses = classNames({
+            "editor__item": true,
+            "active": this.state.isActivated
+        })
+        return (
+            <a href="#" className={detailItemClasses} onClick={this.handleClickItem} isActivated={this.state.isActivated}>asdasd</a>
         );
     }
 });
