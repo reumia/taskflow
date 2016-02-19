@@ -211,6 +211,9 @@ var TaskWrap = React.createClass({
 
 // Task
 var Task = React.createClass({
+    getInitialState: function () {
+        return {data: this.props.data}
+    },
     getDateByTimeStamp: function (string) {
         var timestamp = new Date(string);
         if (timestamp.getTime() > 0) {
@@ -223,7 +226,7 @@ var Task = React.createClass({
         console.log('Task Clicked!');
     },
     render: function () {
-        var data = this.props.data;
+        var data = this.state.data;
         var inlineStyleColor = {color: data.categoryColor};
         var inlineStyleBackgroundColor = {backgroundColor: data.categoryColor};
         var deployDate = this.getDateByTimeStamp(data.deploy);
