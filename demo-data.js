@@ -15,15 +15,15 @@ var data = {
     "categories" : {
         0: {
             "name": "NONE",
-            "color": "#DDDDDD"
+            "color": ""
         },
         1: {
             "name": "GRAFOLIO",
-            "color": "#FFCC00"
+            "color": "royalblue"
         },
         2: {
             "name": "LINEPLAY",
-            "color": "#00FFFF"
+            "color": "red"
         }
     }
 

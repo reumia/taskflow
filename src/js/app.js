@@ -1,3 +1,6 @@
+'use strict';
+
+// require
 var classNames = require('classnames');
 
 // TaskFlow
@@ -37,7 +40,7 @@ var TaskEditor = React.createClass({
         return (
             <form className="editor">
                 <h2 className="editor__title">Edit Task</h2>
-                <CategoryEdit data={this.props.dataForCategory}/>
+                <CategoryEdit categories={this.props.categories}/>
                 <BasicInfoEdit />
                 <DetailEdit />
                 <div className="table">
@@ -61,28 +64,19 @@ var CategoryEdit = React.createClass({
         } else {
             this.setState({isActivated: true});
         }
-        this.getStickerColors();
-    },
-    getStickerColors: function () {
-        var data = this.props.data;
-        var colorArray = ['#FFCC00', 'orange', 'red', 'blueviolet', 'blue', 'darkturquoise', 'limegreen', 'hotpink'];
-        var result = [];
-        colorArray.map(function(color){
-
-        });
     },
     render: function () {
         return (
             <section className="editor__section category">
                 <div className="table">
                     <a href="#" className="button table__item" onClick={this.handleClickSelect}>
-                        <span className="fa fa-chevron-down"></span> 카테고리 선택
+                        <i className="fa fa-chevron-down"></i> 카테고리 선택
                     </a>
                     <a href="#" className="button table__item" onClick={this.handleClickConfig}>
-                        <span className="fa fa-plus"></span> 카테고리 관리
+                        <i className="fa fa-gear"></i> 카테고리 관리
                     </a>
                 </div>
-                <CategorySelectbox onClick={this.handleClickButton} isActivated={this.state.isActivated} />
+                <CategorySelectbox onClick={this.handleClickButton} categories={this.props.categories} isActivated={this.state.isActivated} />
             </section>
         );
     }
@@ -90,17 +84,15 @@ var CategoryEdit = React.createClass({
 
 // CategorySelectbox
 var CategorySelectbox = React.createClass({
-    getStickerColors: function () {
-        var colorArray = ['#FFCC00', 'orange', 'red', 'blueviolet', 'blue', 'darkturquoise', 'limegreen', 'hotpink'];
-        return colorArray;
-    },
     render: function () {
-        var selectboxNodes = this.getStickerColors().map(function (color) {
-            var inlineStyleColor = {color: color};
-            var inlineStyleBackgroundColor = {backgroundColor: color};
+        var categories = this.props.categories;
+        var selectboxNodes = Object.keys(categories).map(function (key) {
+            var category = categories[key];
+            var inlineStyleColor = {color: category.color};
+            var inlineStyleBackgroundColor = {backgroundColor: category.color};
             return (
-                <a href="#" className="selectbox__item" style={inlineStyleColor} key={color}>
-                    <i className="sticker" style={inlineStyleBackgroundColor}></i>
+                <a href="#" className="selectbox__item" style={inlineStyleColor} key={category.color}>
+                    <i className="sticker" style={inlineStyleBackgroundColor}></i> {category.name}
                 </a>
             );
         });
@@ -110,7 +102,6 @@ var CategorySelectbox = React.createClass({
         });
         return (
             <div className={selectboxClass}>
-                <a href="#" className="selectbox__item"><i className="sticker"></i>NONE</a>
                 {selectboxNodes}
             </div>
         );
@@ -243,7 +234,6 @@ var Task = React.createClass({
         var data = this.state.data;
         var categories = this.props.categories;
         var categoryId = data.categoryId;
-        console.log(categoryId);
         var inlineStyleColor = {color: categories[categoryId].color};
         var inlineStyleBackgroundColor = {backgroundColor: categories[categoryId].color};
         var deployDate = this.getDateByTimeStamp(data.deploy);
