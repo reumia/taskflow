@@ -64,19 +64,19 @@
   // Select Category Section
   &.category {
     position: relative;
+    border-width: 0;
     .button {
-      width: 42px;
     }
     .editor__input {
       text-align: left;
       border-width: 1px!important;
       margin-left: -1px;
-      width: 267px;
     }
     .selectbox {
       position: absolute;
-      left: -1px;
-      right: 1px;
+      left: 0;
+      right: 0;
+      top: 42px;
       z-index: 100;
       @include box-shadow();
       .selectbox__item {

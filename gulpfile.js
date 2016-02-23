@@ -1,19 +1,27 @@
 'use strict';
 
-var gulp = require('gulp');
-var browserify = require('browserify');
-var watchify = require('watchify');
-var sass = require('gulp-sass');
-var sourcemaps = require('gulp-sourcemaps');
-var webserver = require('gulp-webserver');
-var notify     = require('gulp-notify');
-var to5ify     = require('6to5ify');
-var source     = require('vinyl-source-stream');
+var gulp        = require('gulp');
+var browserify  = require('browserify');
+var watchify    = require('watchify');
+var sass        = require('gulp-sass');
+var sourcemaps  = require('gulp-sourcemaps');
+var webserver   = require('gulp-webserver');
+var notify      = require('gulp-notify');
+var to5ify      = require('6to5ify');
+var source      = require('vinyl-source-stream');
+var fontAwesome = require('node-font-awesome');
+
+gulp.task('fonts', function() {
+    gulp.src(fontAwesome.fonts)
+        .pipe(gulp.dest('./src/fonts'));
+});
 
 gulp.task('sass', function() {
     return gulp.src('./src/scss/app.scss')
     	.pipe(sourcemaps.init())
-        .pipe(sass().on('error', sass.logError))
+        .pipe(sass({
+            includePaths: [fontAwesome.scssPath]
+        }).on('error', sass.logError))
         .pipe(sourcemaps.write('./maps'))
         .pipe(gulp.dest('./src/css'));
 });

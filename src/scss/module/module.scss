@@ -38,15 +38,18 @@ input.button--block {
 // 100% 너비 좌우 정렬
 .table {
   display: table;
+  box-sizing: border-box;
   table-layout: fixed;
-  @include border-unit(0 0 0 1px!important);
   width: 100%;
   .table__item {
     position: relative;
     display: table-cell!important;
-    border-width: 1px 1px 1px 0!important;
+    @include border-unit(1px 0 1px 1px);
     text-align: center;
     line-height: $spacing-unit;
+    & + .table__item {
+      border-right-width: 1px;
+    }
     &:before {
       content: "";
       position: absolute;

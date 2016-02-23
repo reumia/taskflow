@@ -14,16 +14,17 @@ var TaskFlow = React.createClass({
         setInterval(this.loadTasksFromStorage, this.props.pollInterval);
     },
     render: function () {
-        var data = this.props.data;
-        var taskWrapNodes = Object.keys(data).map(function (key) {
-            var item = JSON.parse(data[key]);
+        var categories = this.props.categories;
+        var tasks = this.props.tasks;
+        var taskWrapNodes = Object.keys(tasks).map(function (key) {
+            var task = tasks[key];
             return (
-                <TaskWrap data={item} statement={key} key={key} />
+                <TaskWrap task={task} categories={categories} statement={key} key={key} />
             );
         });
         return (
             <div className="taskflow">
-                <aside className="taskflow__aside"><TaskEditor /></aside>
+                <aside className="taskflow__aside"><TaskEditor categories={categories}/></aside>
                 <section className="taskflow__body">{taskWrapNodes}</section>
             </div>
         );
@@ -36,7 +37,7 @@ var TaskEditor = React.createClass({
         return (
             <form className="editor">
                 <h2 className="editor__title">Edit Task</h2>
-                <CategoryEdit />
+                <CategoryEdit data={this.props.dataForCategory}/>
                 <BasicInfoEdit />
                 <DetailEdit />
                 <div className="table">
@@ -53,21 +54,34 @@ var CategoryEdit = React.createClass({
     getInitialState: function () {
         return {isActivated: false};
     },
-    handleClickButton: function (e) {
+    handleClickSelect: function (e) {
         e.preventDefault();
         if (this.state.isActivated) {
             this.setState({isActivated: false});
         } else {
             this.setState({isActivated: true});
         }
+        this.getStickerColors();
+    },
+    getStickerColors: function () {
+        var data = this.props.data;
+        var colorArray = ['#FFCC00', 'orange', 'red', 'blueviolet', 'blue', 'darkturquoise', 'limegreen', 'hotpink'];
+        var result = [];
+        colorArray.map(function(color){
+
+        });
     },
     render: function () {
         return (
-            <section className="editor__section table category">
-                <a href="#" className="button table__item" onClick={this.handleClickButton}>
-                    <span className="icon icon--caret-down"></span>
-                </a>
-                <input type="text" className="editor__input table__item" placeholder="카테고리" />
+            <section className="editor__section category">
+                <div className="table">
+                    <a href="#" className="button table__item" onClick={this.handleClickSelect}>
+                        <span className="fa fa-chevron-down"></span> 카테고리 선택
+                    </a>
+                    <a href="#" className="button table__item" onClick={this.handleClickConfig}>
+                        <span className="fa fa-plus"></span> 카테고리 관리
+                    </a>
+                </div>
                 <CategorySelectbox onClick={this.handleClickButton} isActivated={this.state.isActivated} />
             </section>
         );
@@ -191,13 +205,13 @@ var TaskWrap = React.createClass({
         }
     },
     render: function () {
-        var data = this.props.data;
-        var event = this.handleClickTask;
+        var task = this.props.task;
+        var categories = this.props.categories;
         var statement = this.getStatement(this.props.statement);
-        var taskNodes = Object.keys(data).map(function (key) {
-            var item = data[key];
+        var taskNodes = Object.keys(task).map(function (key) {
+            var item = task[key];
             return (
-                <Task data={item} statement={key} key={item.date}/>
+                <Task data={item} categories={categories} statement={key} key={item.date}/>
             );
         });
         return (
@@ -222,13 +236,16 @@ var Task = React.createClass({
             return string;
         }
     },
-    handleClick: function () {
+    handleClickTask: function () {
         console.log('Task Clicked!');
     },
     render: function () {
         var data = this.state.data;
-        var inlineStyleColor = {color: data.categoryColor};
-        var inlineStyleBackgroundColor = {backgroundColor: data.categoryColor};
+        var categories = this.props.categories;
+        var categoryId = data.categoryId;
+        console.log(categoryId);
+        var inlineStyleColor = {color: categories[categoryId].color};
+        var inlineStyleBackgroundColor = {backgroundColor: categories[categoryId].color};
         var deployDate = this.getDateByTimeStamp(data.deploy);
         var stickerNodes = data.detail.map(function (sticker) {
             return (
@@ -236,10 +253,10 @@ var Task = React.createClass({
             );
         });
         return (
-            <article className="task" onClick={this.handleClick}>
+            <article className="task" onClick={this.handleClickTask}>
                 <h3 className="task__category" style={inlineStyleColor}>
                     <i className="sticker" style={inlineStyleBackgroundColor}></i>
-                    <em>{data.category}</em>
+                    <em>{categories[categoryId].name}</em>
                 </h3>
                 <h2 className="task__title">{data.title}</h2>
                 <div className="task__deploy">배포<i>{deployDate}</i></div>
@@ -255,10 +272,11 @@ var Task = React.createClass({
 });
 
 // Set Database
-var myStorage = window.localStorage;
+var myTasks = JSON.parse(window.localStorage.tasks);
+var myCategories = JSON.parse(window.localStorage.categories);
 
 // Render
 ReactDOM.render(
-    <TaskFlow data={myStorage} pollInterval={3000}/>,
+    <TaskFlow tasks={myTasks} categories={myCategories} pollInterval={3000}/>,
     document.getElementById('content')
 );
