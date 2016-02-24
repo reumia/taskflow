@@ -84,6 +84,10 @@ var CategoryEdit = React.createClass({
 
 // CategorySelectbox
 var CategorySelectbox = React.createClass({
+    handleClickItem: function (e) {
+        e.preventDefault();
+        console.log(e);
+    },
     render: function () {
         var categories = this.props.categories;
         var selectboxNodes = Object.keys(categories).map(function (key) {
@@ -91,11 +95,11 @@ var CategorySelectbox = React.createClass({
             var inlineStyleColor = {color: category.color};
             var inlineStyleBackgroundColor = {backgroundColor: category.color};
             return (
-                <a href="#" className="selectbox__item" style={inlineStyleColor} key={category.color}>
+                <a href="#" className="selectbox__item" style={inlineStyleColor} key={category.color} onClick={this.handleClickItem}>
                     <i className="sticker" style={inlineStyleBackgroundColor}></i> {category.name}
                 </a>
             );
-        });
+        }.bind(this));
         var selectboxClass = classNames({
             'selectbox': true,
             'active': this.props.isActivated
