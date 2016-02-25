@@ -65,6 +65,10 @@ var CategoryEdit = React.createClass({
             this.setState({isActivated: true});
         }
     },
+    handleClickItem: function (e) {
+        e.preventDefault();
+        console.log('Item Clicked');
+    },
     render: function () {
         return (
             <section className="editor__section category">
@@ -76,7 +80,7 @@ var CategoryEdit = React.createClass({
                         <i className="fa fa-gear"></i> 카테고리 관리
                     </a>
                 </div>
-                <CategorySelectbox onClick={this.handleClickButton} categories={this.props.categories} isActivated={this.state.isActivated} />
+                <CategorySelectbox onClick={this.handleClickButton} itemClick={this.handleClickItem} categories={this.props.categories} isActivated={this.state.isActivated} />
             </section>
         );
     }
@@ -84,10 +88,6 @@ var CategoryEdit = React.createClass({
 
 // CategorySelectbox
 var CategorySelectbox = React.createClass({
-    handleClickItem: function (e) {
-        e.preventDefault();
-        console.log(e);
-    },
     render: function () {
         var categories = this.props.categories;
         var selectboxNodes = Object.keys(categories).map(function (key) {
@@ -95,7 +95,7 @@ var CategorySelectbox = React.createClass({
             var inlineStyleColor = {color: category.color};
             var inlineStyleBackgroundColor = {backgroundColor: category.color};
             return (
-                <a href="#" className="selectbox__item" style={inlineStyleColor} key={category.color} onClick={this.handleClickItem}>
+                <a href="#" className="selectbox__item" style={inlineStyleColor} key={category.color} onClick={this.props.itemClick}>
                     <i className="sticker" style={inlineStyleBackgroundColor}></i> {category.name}
                 </a>
             );

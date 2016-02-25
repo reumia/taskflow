@@ -11,6 +11,7 @@
 
 * [map() 함수로 반복 호출된 자식 노드에 this 바인드하기](http://stackoverflow.com/questions/27707911/add-event-handler-to-react-dom-element-dynamically)
 * [부모 컴퍼넌트에 접근하기](https://facebook.github.io/react/tips/communicate-between-components.html)
+* [컴퍼넌트간의 이벤트 참조와 상속](http://stackoverflow.com/questions/21054955/react-js-reference-function-in-another-component)
 
 #### Done
 
