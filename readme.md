@@ -3,9 +3,13 @@
 #### Todo
 
 * Task에 Draggable, Sortable UI Library 추가
-    * ~[RubaXa](https://github.com/RubaXa/Sortable) 라이브러리 참고~
-    * 직접 개발하거나 좀 더 Light한 프레임워크 찾을 필요가 있음.
-* Data Update에 Object.observe 고려
+    * ~~[RubaXa](https://github.com/RubaXa/Sortable) : 적용하기 복잡하고 예제가 어려움~~
+    * [React Sortable](http://webcloud.se/react-sortable/) : 간단하고 데이터구조 변경도 쉬워보이나 여러 리스트간의 데이터 이동을 어떨지..?
+    * [React Sortable List](https://github.com/StevenIseki/react-sortable-list) : Mixin이 아니라서 바로 사용가능할 듯. 최소한의 툴.
+    * 그냥 개발해 볼까?
+        * [HTML5 Drag & Drop API](http://www.w3schools.com/html/html5_draganddrop.asp)
+        * [Drag & Drop for React](http://gaearon.github.io/react-dnd/)
+* Data Update에 [Object.observe](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/observe) 고려
 
 #### React
 

@@ -1,7 +1,9 @@
 'use strict';
 
 // require
-var classNames = require('classnames');
+var React = require('react');
+var ReactDOM = require('react-dom');
+var ClassNames = require('classnames');
 
 // TaskFlow
 var TaskFlow = React.createClass({
@@ -100,7 +102,7 @@ var CategorySelectbox = React.createClass({
                 </a>
             );
         }.bind(this));
-        var selectboxClass = classNames({
+        var selectboxClass = ClassNames({
             'selectbox': true,
             'active': this.props.isActivated
         });
@@ -168,7 +170,7 @@ var DetailItem = React.createClass({
         }
     },
     render: function () {
-        var detailItemClasses = classNames({
+        var detailItemClasses = ClassNames({
             "editor__item": true,
             "active": this.state.isActivated
         })
