@@ -12,11 +12,17 @@ var TaskFlow = React.createClass({
         this.setState({data: this.props.data});
     },
     getInitialState: function () {
-        return {data: []};
+        return {
+            data: [],
+            currentTaskKey: []
+        };
     },
     componentDidMount: function () {
         this.loadTasksFromStorage();
         setInterval(this.loadTasksFromStorage, this.props.pollInterval);
+    },
+    handleClickTask: function (node, event) {
+        this.setState({currentTaskKey: node});
     },
     render: function () {
         var categories = this.props.categories;
@@ -24,12 +30,12 @@ var TaskFlow = React.createClass({
         var taskWrapNodes = Object.keys(tasks).map(function (key) {
             var task = tasks[key];
             return (
-                <TaskWrap task={task} categories={categories} statement={key} key={key} />
+                <TaskWrap task={task} categories={categories} statement={key} key={key} taskClick={this.handleClickTask} />
             );
-        });
+        }.bind(this));
         return (
             <div className="taskflow">
-                <aside className="taskflow__aside"><TaskEditor categories={categories}/></aside>
+                <aside className="taskflow__aside"><TaskEditor categories={categories} currentTaskKey={this.state.currentTaskKey} /></aside>
                 <section className="taskflow__body">{taskWrapNodes}</section>
             </div>
         );

@@ -5,10 +5,15 @@ var ClassNames = require('classnames');
 // TaskWrap
 var TaskWrap = React.createClass({
     getInitialState: function () {
-        return {statement: ["TODO", "IN PROGRESS", "DONE", "NEXT"]};
+        return {
+            statement: ["TODO", "IN PROGRESS", "DONE", "NEXT"]
+        };
     },
-    getStatement: function(num) {
+    getStatement: function (num) {
         return this.state.statement[num];
+    },
+    handleClickTask: function (node) {
+        this.props.taskClick(node);
     },
     render: function () {
         var task = this.props.task;
@@ -16,10 +21,11 @@ var TaskWrap = React.createClass({
         var statement = this.getStatement(this.props.statement);
         var taskNodes = Object.keys(task).map(function (key) {
             var item = task[key];
+            var taskKey = [this.props.statement, key];
             return (
-                <Task data={item} categories={categories} statement={key} key={item.date}/>
+                <Task data={item} categories={categories} key={item.date} taskClick={this.handleClickTask.bind(this, taskKey)} />
             );
-        });
+        }.bind(this));
         return (
             <div className="task-wrap">
                 <h2 className="task-statement">{statement}</h2>
@@ -42,11 +48,6 @@ var Task = React.createClass({
             return string;
         }
     },
-    handleClickTask: function (e) {
-        e.preventDefault();
-        console.log('Task Clicked!');
-
-    },
     render: function () {
         var data = this.state.data;
         var categories = this.props.categories;
@@ -60,7 +61,7 @@ var Task = React.createClass({
             );
         });
         return (
-            <article className="task" onClick={this.handleClickTask}>
+            <article className="task" onClick={this.props.taskClick}>
                 <h3 className="task__category" style={inlineStyleColor}>
                     <i className="sticker" style={inlineStyleBackgroundColor}></i>
                     <em>{categories[categoryId].name}</em>
