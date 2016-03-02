@@ -14,7 +14,7 @@ var TaskFlow = React.createClass({
     getInitialState: function () {
         return {
             data: [],
-            currentTaskKey: []
+            currentTaskKey: null
         };
     },
     componentDidMount: function () {
@@ -35,7 +35,7 @@ var TaskFlow = React.createClass({
         }.bind(this));
         return (
             <div className="taskflow">
-                <aside className="taskflow__aside"><TaskEditor categories={categories} currentTaskKey={this.state.currentTaskKey} /></aside>
+                <aside className="taskflow__aside"><TaskEditor categories={categories} tasks={tasks} currentTaskKey={this.state.currentTaskKey} /></aside>
                 <section className="taskflow__body">{taskWrapNodes}</section>
             </div>
         );

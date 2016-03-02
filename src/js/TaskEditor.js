@@ -4,15 +4,15 @@ var ClassNames = require('classnames');
 
 // TaskEditor
 var TaskEditor = React.createClass({
-    getInitialState: function () {
-        return {
-
-        }
-    },
     render: function () {
+        var tasks = this.props.tasks;
+        var currentTaskKey = this.props.currentTaskKey;
+        if ( currentTaskKey ){
+            var currentTask = tasks[currentTaskKey[0]][currentTaskKey[1]];
+        }
+        console.log(currentTask);
         return (
             <form className="editor">
-                {this.props.currentTaskKey}
                 <h2 className="editor__title">Edit Task</h2>
                 <CategoryEdit categories={this.props.categories}/>
                 <BasicInfoEdit />

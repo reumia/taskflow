@@ -21,7 +21,7 @@ var TaskWrap = React.createClass({
         var statement = this.getStatement(this.props.statement);
         var taskNodes = Object.keys(task).map(function (key) {
             var item = task[key];
-            var taskKey = [this.props.statement, key];
+            var taskKey = [Number(this.props.statement), Number(key)];
             return (
                 <Task data={item} categories={categories} key={item.date} taskClick={this.handleClickTask.bind(this, taskKey)} />
             );
