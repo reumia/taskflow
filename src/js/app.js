@@ -14,7 +14,7 @@ var TaskFlow = React.createClass({
     getInitialState: function () {
         return {
             data: [],
-            currentTaskKey: null
+            currentTaskKey: []
         };
     },
     componentDidMount: function () {

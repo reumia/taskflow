@@ -4,18 +4,26 @@ var ClassNames = require('classnames');
 
 // TaskEditor
 var TaskEditor = React.createClass({
-    render: function () {
-        var tasks = this.props.tasks;
-        var currentTaskKey = this.props.currentTaskKey;
-        if ( currentTaskKey ){
-            var currentTask = tasks[currentTaskKey[0]][currentTaskKey[1]];
+    getInitialState: function(){
+        return {
+            task: {}
         }
-        console.log(currentTask);
+    },
+    componentWillReceiveProps: function(nextProps){
+        var tasks = this.props.tasks;
+        var currentTaskKey = nextProps.currentTaskKey;
+        if ( currentTaskKey.length > 0 ){
+            this.setState({
+                task: tasks[currentTaskKey[0]][currentTaskKey[1]]
+            });
+        }
+    },
+    render: function () {
         return (
             <form className="editor">
                 <h2 className="editor__title">Edit Task</h2>
                 <CategoryEdit categories={this.props.categories}/>
-                <BasicInfoEdit />
+                <BasicInfoEdit taskTitle={this.state.task.title}/>
                 <DetailEdit />
                 <div className="table">
                     <a href="#" className="button table__item">추가</a>
@@ -91,7 +99,7 @@ var BasicInfoEdit = React.createClass({
     render: function () {
         return (
             <section className="editor__section">
-                <textarea className="editor__textarea" name="" id="" cols="30" rows="4" placeholder="제목" />
+                <textarea className="editor__textarea" name="" id="" cols="30" rows="4" placeholder="제목" value={this.props.taskTitle} />
                 <input className="editor__input" type="text" placeholder="배포 20160218" />
                 <input className="editor__input" type="text" placeholder="출처 GRAFOLIO-3000" />
             </section>
