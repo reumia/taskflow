@@ -128,6 +128,20 @@ var BasicInfoEdit = React.createClass({
         deploy: PropTypes.any,
         origin: PropTypes.string
     },
+    getInitialState: function () {
+        return {
+            title: this.props.title,
+            deploy: this.props.deploy,
+            origin: this.props.origin
+        }
+    },
+    componentWillReceiveProps: function (nextProp) {
+        this.setState({
+            title: nextProp.title,
+            deploy: nextProp.deploy,
+            origin: nextProp.origin
+        });
+    },
     getDateByTimestamp: function (string) {
         var timestamp = new Date(string);
         if (timestamp.getTime() > 0) {
@@ -136,12 +150,15 @@ var BasicInfoEdit = React.createClass({
             return string;
         }
     },
+    handleChangeTitle: function (event) {
+        this.setState({ title: event.target.valeu });
+    },
     render: function () {
         return (
             <section className="editor__section">
-                <textarea className="editor__textarea" name="" id="" cols="30" rows="4" placeholder="제목" value={this.props.title} />
-                <input className="editor__input" type="text" placeholder="배포 20160218" value={this.getDateByTimestamp(this.props.deploy)} />
-                <input className="editor__input" type="text" placeholder="출처 GRAFOLIO-3000" value={this.props.origin} />
+                <textarea className="editor__textarea" cols="30" rows="4" placeholder="제목" value={this.state.title} onChange={this.handleChangeTitle} />
+                <input className="editor__input" type="text" placeholder="배포 20160218" value={this.getDateByTimestamp(this.state.deploy)} />
+                <input className="editor__input" type="text" placeholder="출처 GRAFOLIO-3000" value={this.state.origin} />
             </section>
         );
     }

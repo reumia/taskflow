@@ -23,3 +23,4 @@
 * [컴퍼넌트간의 이벤트 참조와 상속](http://stackoverflow.com/questions/21054955/react-js-reference-function-in-another-component)
 * [jQuery.addClass()를 React에서 구현하는 방법 : Classnames 유틸리티의 활용](https://github.com/JedWatson/classnames)
 * [React 간단 매뉴얼](http://ricostacruz.com/cheatsheets/react.html)
+* [Input에 value 값을 설정할 경우 타이핑이 안되는 문제](http://facebook.github.io/react/docs/forms.html#controlled-components)
