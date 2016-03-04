@@ -179,14 +179,19 @@ var DetailEdit = React.createClass({
     addDetailItem: function (callback) {
         var input = this.refs.detailItemText;
         var inputVal = input.value;
-        var newItem = {
-            text: inputVal,
-            checked: false
-        };
-        this.setState({
-            items: this.state.items.concat(newItem)
-        });
-        callback.apply(this);
+        var newItem;
+        if (inputVal == "") {
+            return
+        } else {
+            newItem = {
+                text: inputVal,
+                checked: false
+            };
+            this.setState({
+                items: this.state.items.concat(newItem)
+            });
+            callback.apply(this);
+        }
     },
     clearInput: function () {
         this.refs.detailItemText.value = "";

@@ -12,8 +12,10 @@
     * 그냥 하지 말까?
         * Sorting 은 어떻게 처리할 것이냐 : 날짜별로 정의하면 문제될 거 없을 듯
 * Data Update에 [Object.observe](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/observe) 고려
-* 추가/취소 버튼 상단으로 옮기기 (버튼 위치가 변경되어서 골치아픔)
+* 추가/취소 버튼 상단으로 옮기기
 * 키보드 단축키 만들기
+* DetailEdit
+    * 추가 시에 Checked State 초기화 되는 이슈
 
 #### React
 
