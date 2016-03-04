@@ -1,12 +1,18 @@
 'use strict';
 var React = require('react');
 var ClassNames = require('classnames');
+var PropTypes = React.PropTypes;
 
 // TaskEditor
 var TaskEditor = React.createClass({
     getInitialState: function(){
         return {
-            task: {}
+            task: {
+                title: "",
+                deploy: "",
+                origin: "",
+                detail: []
+            }
         }
     },
     componentWillReceiveProps: function(nextProps){
@@ -19,12 +25,13 @@ var TaskEditor = React.createClass({
         }
     },
     render: function () {
+        var task = this.state.task;
         return (
             <form className="editor">
                 <h2 className="editor__title">Edit Task</h2>
                 <CategoryEdit categories={this.props.categories}/>
-                <BasicInfoEdit taskTitle={this.state.task.title}/>
-                <DetailEdit />
+                <BasicInfoEdit title={task.title} deploy={task.deploy} origin={task.origin} />
+                <DetailEdit detail={task.detail} />
                 <div className="table">
                     <a href="#" className="button table__item">추가</a>
                     <a href="#" className="button table__item">취소</a>
@@ -96,12 +103,25 @@ var CategorySelectbox = React.createClass({
 
 // BasicInfoEdit
 var BasicInfoEdit = React.createClass({
+    propTypes: {
+        items: PropTypes.array,
+        deploy: PropTypes.any,
+        origin: PropTypes.string
+    },
+    getDateByTimestamp: function (string) {
+        var timestamp = new Date(string);
+        if (timestamp.getTime() > 0) {
+            return timestamp.toLocaleDateString();
+        } else {
+            return string;
+        }
+    },
     render: function () {
         return (
             <section className="editor__section">
-                <textarea className="editor__textarea" name="" id="" cols="30" rows="4" placeholder="제목" value={this.props.taskTitle} />
-                <input className="editor__input" type="text" placeholder="배포 20160218" />
-                <input className="editor__input" type="text" placeholder="출처 GRAFOLIO-3000" />
+                <textarea className="editor__textarea" name="" id="" cols="30" rows="4" placeholder="제목" value={this.props.title} />
+                <input className="editor__input" type="text" placeholder="배포 20160218" value={this.getDateByTimestamp(this.props.deploy)} />
+                <input className="editor__input" type="text" placeholder="출처 GRAFOLIO-3000" value={this.props.origin} />
             </section>
         );
     }
@@ -109,25 +129,44 @@ var BasicInfoEdit = React.createClass({
 
 // DetailEdit
 var DetailEdit = React.createClass({
+    getInitialState: function () {
+        return {
+            items: []
+        }
+    },
+    componentWillReceiveProps: function (nextProp) {
+        this.setState({
+            items: nextProp.detail
+        })
+    },
     render: function () {
         return (
             <section className="editor__section detail">
                 <input type="text" className="editor__input" placeholder="상세" />
                 <a href="#" className="button button--block">추가</a>
-                <DetailItems />
+                <DetailItems items={this.state.items} />
             </section>
         );
     }
 })
 
-// DetailItem
+// DetailItems
 var DetailItems = React.createClass({
+    getInitialState: function () {
+        return {
+            items: this.props.items
+        };
+    },
+    componentWillReceiveProps: function (nextProp) {
+        this.setState({items: nextProp.items});
+    },
     render: function () {
-        var detailItemNodes = [0,1,2].map(function(detailItem){
+        var detailItemNodes = Object.keys(this.state.items).map(function(key){
+            console.log(this.state.items[key]);
             return (
-                <DetailItem />
+                <DetailItem data={this.state.items[key]} />
             );
-        });
+        }.bind(this));
         return (
             <div className="detail-group">
                 {detailItemNodes}
@@ -139,23 +178,31 @@ var DetailItems = React.createClass({
 // DetailItem
 var DetailItem = React.createClass({
     getInitialState: function () {
-        return {isActivated: false};
+        return this.props.data;
+    },
+    componentWillReceiveProps: function (nextProp) {
+        this.setState(nextProp.data);
     },
     handleClickItem: function (e) {
         e.preventDefault();
-        if (this.state.isActivated) {
-            this.setState({isActivated: false});
+        if (this.state.checked) {
+            this.setState({
+                checked: false
+            });
         } else {
-            this.setState({isActivated: true});
+            this.setState({
+                checked: true
+            });
         }
     },
     render: function () {
         var detailItemClasses = ClassNames({
             "editor__item": true,
-            "active": this.state.isActivated
-        })
+            "active": this.state.checked
+        });
+        var data = this.state;
         return (
-            <a href="#" className={detailItemClasses} onClick={this.handleClickItem} isActivated={this.state.isActivated}>asdasd</a>
+            <a href="#" className={detailItemClasses} onClick={this.handleClickItem} checked={this.state.checked} >{data.text}</a>
         );
     }
 });

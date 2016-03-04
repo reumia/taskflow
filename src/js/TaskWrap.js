@@ -38,7 +38,7 @@ var TaskWrap = React.createClass({
 // Task
 var Task = React.createClass({
     getInitialState: function () {
-        return {data: this.props.data}
+        return this.props.data
     },
     getDateByTimeStamp: function (string) {
         var timestamp = new Date(string);
@@ -49,7 +49,7 @@ var Task = React.createClass({
         }
     },
     render: function () {
-        var data = this.state.data;
+        var data = this.state;
         var categories = this.props.categories;
         var categoryId = data.categoryId;
         var inlineStyleColor = {color: categories[categoryId].color};

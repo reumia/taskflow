@@ -12,6 +12,8 @@
     * 그냥 하지 말까?
         * Sorting 은 어떻게 처리할 것이냐 : 날짜별로 정의하면 문제될 거 없을 듯
 * Data Update에 [Object.observe](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/observe) 고려
+* 추가/취소 버튼 상단으로 옮기기 (버튼 위치가 변경되어서 골치아픔)
+* 키보드 단축키 만들기
 
 #### React
 
@@ -20,4 +22,4 @@
 * [부모 컴퍼넌트에 접근하기](https://facebook.github.io/react/tips/communicate-between-components.html)
 * [컴퍼넌트간의 이벤트 참조와 상속](http://stackoverflow.com/questions/21054955/react-js-reference-function-in-another-component)
 * [jQuery.addClass()를 React에서 구현하는 방법 : Classnames 유틸리티의 활용](https://github.com/JedWatson/classnames)
-
+* [React 간단 매뉴얼](http://ricostacruz.com/cheatsheets/react.html)

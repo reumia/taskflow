@@ -36,6 +36,9 @@
         & + .sticker {
           margin-left: 4px;
         }
+        &[data-checked=true] {
+          background-color: $color-font-lighter;
+        }
       }
     }
   }

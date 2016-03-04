@@ -2117,7 +2117,7 @@ table {
 
 html,
 body {
-  color: #444;
+  color: #333;
   font-family: Helvetica, sans-serif;
   font-size: 14px;
   line-height: 1.4; }
@@ -2140,7 +2140,7 @@ a,
   display: inline-block;
   width: 8px;
   height: 8px;
-  background-color: #dddddd;
+  background-color: #cccccc;
   vertical-align: baseline; }
 
 .replacement {
@@ -2160,23 +2160,23 @@ a,
   padding: 10px;
   border-radius: 0;
   background-color: #fff;
-  color: #919191;
+  color: gray;
   font-size: 14px;
   text-decoration: none;
   outline: none;
   -webkit-appearance: none;
   display: inline-block; }
   .button:hover {
-    color: #444;
-    border-color: #919191;
+    color: #333;
+    border-color: gray;
     background-color: #fcfcfc; }
   .button.active {
     color: royalblue;
     border-color: royalblue;
     background-color: #f6f8fe; }
   .button:hover {
-    color: #444;
-    border-color: #919191;
+    color: #333;
+    border-color: gray;
     background-color: #fcfcfc; }
   .button.active {
     color: royalblue;
@@ -2214,7 +2214,7 @@ input.button--block {
       right: -1px;
       border-width: 1px;
       border-style: solid;
-      border-color: #919191;
+      border-color: gray;
       transition: opacity 0.1s;
       opacity: 0; }
     .table .table__item.active:before, .table .table__item:hover:before {
@@ -2236,7 +2236,7 @@ input.button--block {
     padding: 10px;
     border-radius: 0;
     background-color: #fff;
-    color: #919191;
+    color: gray;
     font-size: 14px;
     text-decoration: none;
     outline: none;
@@ -2247,8 +2247,8 @@ input.button--block {
     display: block;
     margin-top: -1px; }
     .selectbox .selectbox__item:hover {
-      color: #444;
-      border-color: #919191;
+      color: #333;
+      border-color: gray;
       background-color: #fcfcfc; }
     .selectbox .selectbox__item.active {
       color: royalblue;
@@ -2323,7 +2323,7 @@ input.button--block {
   padding: 10px;
   border-radius: 0;
   background-color: #fff;
-  color: #919191;
+  color: gray;
   font-size: 14px;
   text-decoration: none;
   outline: none;
@@ -2335,8 +2335,8 @@ input.button--block {
   .editor .editor__input:hover,
   .editor .editor__item:focus,
   .editor .editor__item:hover {
-    color: #444;
-    border-color: #919191;
+    color: #333;
+    border-color: gray;
     background-color: #fcfcfc; }
   .editor .editor__textarea.active,
   .editor .editor__input.active,
@@ -2404,7 +2404,7 @@ input.button--block {
       -moz-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); }
       .editor__section.category .selectbox .selectbox__item {
-        color: #dddddd;
+        color: #cccccc;
         font-size: 10px;
         font-weight: bold;
         text-transform: uppercase; }
@@ -2421,7 +2421,7 @@ input.button--block {
   cursor: pointer; }
   .task .task__category {
     margin-bottom: 5px;
-    color: #dddddd;
+    color: #cccccc;
     font-size: 10px;
     font-weight: bold;
     text-transform: uppercase; }
@@ -2436,7 +2436,7 @@ input.button--block {
   .task .task__deploy,
   .task .task__origin,
   .task .task__detail {
-    color: #919191;
+    color: gray;
     font-size: 12px; }
     .task .task__deploy i,
     .task .task__origin i,
@@ -2447,6 +2447,8 @@ input.button--block {
     display: inline-block; }
     .task .task__detail .sticker-wrap .sticker + .sticker {
       margin-left: 4px; }
+    .task .task__detail .sticker-wrap .sticker[data-checked=true] {
+      background-color: gray; }
   .task:hover {
     background-color: #fcfcfc; }
 
