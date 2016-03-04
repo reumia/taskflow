@@ -19,7 +19,6 @@ var TaskFlow = React.createClass({
     },
     componentDidMount: function () {
         this.loadTasksFromStorage();
-        setInterval(this.loadTasksFromStorage, this.props.pollInterval);
     },
     handleClickTask: function (node, event) {
         this.setState({currentTaskKey: node});
@@ -48,6 +47,6 @@ var myCategories = JSON.parse(window.localStorage.categories);
 
 // Render
 ReactDOM.render(
-    <TaskFlow tasks={myTasks} categories={myCategories} pollInterval={3000}/>,
+    <TaskFlow tasks={myTasks} categories={myCategories} />,
     document.getElementById('content')
 );

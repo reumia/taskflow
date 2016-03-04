@@ -8,6 +8,7 @@ var TaskEditor = React.createClass({
     getInitialState: function(){
         return {
             task: {
+                categoryId: null,
                 title: "",
                 deploy: "",
                 origin: "",
@@ -29,7 +30,7 @@ var TaskEditor = React.createClass({
         return (
             <form className="editor">
                 <h2 className="editor__title">Edit Task</h2>
-                <CategoryEdit categories={this.props.categories}/>
+                <CategoryEdit categories={this.props.categories} categoryId={task.categoryId} />
                 <BasicInfoEdit title={task.title} deploy={task.deploy} origin={task.origin} />
                 <DetailEdit detail={task.detail} />
                 <div className="table">
@@ -44,26 +45,42 @@ var TaskEditor = React.createClass({
 // CategoryEdit
 var CategoryEdit = React.createClass({
     getInitialState: function () {
-        return {isActivated: false};
+        return {
+            isActivated: false,
+            currentCategoryId: this.props.categoryId
+        };
     },
     handleClickSelect: function (e) {
         e.preventDefault();
-        if (this.state.isActivated) {
-            this.setState({isActivated: false});
+        this.toggleSelectBox(this);
+    },
+    handleClickItem: function (categoryId) {
+        this.setState({currentCategoryId: categoryId});
+        this.toggleSelectBox(this);
+    },
+    toggleSelectBox: function (self) {
+        if (self.state.isActivated) {
+            self.setState({isActivated: false});
         } else {
-            this.setState({isActivated: true});
+            self.setState({isActivated: true});
         }
     },
-    handleClickItem: function (e) {
-        e.preventDefault();
-        console.log('Item Clicked');
+    componentWillReceiveProps: function (nextProp) {
+        this.setState({currentCategoryId: nextProp.categoryId});
     },
     render: function () {
+        var currentCategory = this.props.categories[this.state.currentCategoryId];
+        var buttonStyle = {color: ""};
+        var buttonText = "카테고리 선택";
+        if (currentCategory != undefined) {
+            buttonStyle.color = currentCategory.color;
+            buttonText = currentCategory.name;
+        }
         return (
             <section className="editor__section category">
                 <div className="table">
-                    <a href="#" className="button table__item" onClick={this.handleClickSelect}>
-                        <i className="fa fa-chevron-down"></i> 카테고리 선택
+                    <a href="#" className="button table__item" onClick={this.handleClickSelect} style={buttonStyle}>
+                        <i className="fa fa-chevron-down"></i> {buttonText}
                     </a>
                     <a href="#" className="button table__item" onClick={this.handleClickConfig}>
                         <i className="fa fa-gear"></i> 카테고리 관리
@@ -77,6 +94,9 @@ var CategoryEdit = React.createClass({
 
 // CategorySelectbox
 var CategorySelectbox = React.createClass({
+    handleClickItem: function (key) {
+        this.props.itemClick(key);
+    },
     render: function () {
         var categories = this.props.categories;
         var selectboxNodes = Object.keys(categories).map(function (key) {
@@ -84,9 +104,9 @@ var CategorySelectbox = React.createClass({
             var inlineStyleColor = {color: category.color};
             var inlineStyleBackgroundColor = {backgroundColor: category.color};
             return (
-                <a href="#" className="selectbox__item" style={inlineStyleColor} key={category.color} onClick={this.props.itemClick}>
+                <div className="selectbox__item" style={inlineStyleColor} key={category.color} onClick={this.handleClickItem.bind(this, key)}>
                     <i className="sticker" style={inlineStyleBackgroundColor}></i> {category.name}
-                </a>
+                </div>
             );
         }.bind(this));
         var selectboxClass = ClassNames({
@@ -139,11 +159,26 @@ var DetailEdit = React.createClass({
             items: nextProp.detail
         })
     },
+    addDetailItem: function (callback) {
+        var input = this.refs.detailItemText;
+        var inputVal = input.value;
+        var newItem = {
+            text: inputVal,
+            checked: false
+        };
+        this.setState({
+            items: this.state.items.concat(newItem)
+        });
+        callback.apply(this);
+    },
+    clearInput: function () {
+        this.refs.detailItemText.value = "";
+    },
     render: function () {
         return (
             <section className="editor__section detail">
-                <input type="text" className="editor__input" placeholder="상세" />
-                <a href="#" className="button button--block">추가</a>
+                <input ref="detailItemText" type="text" className="editor__input" placeholder="상세" />
+                <a href="#" className="button button--block" onClick={this.addDetailItem.bind(this, this.clearInput)}>추가</a>
                 <DetailItems items={this.state.items} />
             </section>
         );
@@ -162,7 +197,6 @@ var DetailItems = React.createClass({
     },
     render: function () {
         var detailItemNodes = Object.keys(this.state.items).map(function(key){
-            console.log(this.state.items[key]);
             return (
                 <DetailItem data={this.state.items[key]} />
             );

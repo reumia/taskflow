@@ -2407,7 +2407,8 @@ input.button--block {
         color: #cccccc;
         font-size: 10px;
         font-weight: bold;
-        text-transform: uppercase; }
+        text-transform: uppercase;
+        cursor: pointer; }
         .editor__section.category .selectbox .selectbox__item .sticker {
           margin-right: 4px; }
 
