@@ -14,8 +14,6 @@
 * Data Update에 [Object.observe](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/observe) 고려
 * 추가/취소 버튼 상단으로 옮기기
 * 키보드 단축키 만들기
-* DetailEdit
-    * 추가 시에 Checked State 초기화 되는 이슈
 * Index Key 값 생성 : UUID
 
 #### React
@@ -27,3 +25,7 @@
 * [jQuery.addClass()를 React에서 구현하는 방법 : Classnames 유틸리티의 활용](https://github.com/JedWatson/classnames)
 * [React 간단 매뉴얼](http://ricostacruz.com/cheatsheets/react.html)
 * [Input에 value 값을 설정할 경우 타이핑이 안되는 문제](http://facebook.github.io/react/docs/forms.html#controlled-components)
+
+#### 복기해볼 문제
+
+* [\[d609d9f\]](https://github.com/reumia/taskflow/commit/d609d9fade3d3fa5507ba6b597f0077c86434ecd) Detail Item 추가 시에 데이터가 초기화되던 이슈
