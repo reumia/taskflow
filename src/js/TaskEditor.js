@@ -7,32 +7,48 @@ var PropTypes = React.PropTypes;
 var TaskEditor = React.createClass({
     getInitialState: function(){
         return {
-            task: {
-                categoryId: null,
-                title: "",
-                deploy: "",
-                origin: "",
-                detail: []
-            }
+            categoryId: null,
+            title: "",
+            deploy: "",
+            origin: "",
+            detail: []
         }
     },
     componentWillReceiveProps: function(nextProps){
         var tasks = this.props.tasks;
         var currentTaskKey = nextProps.currentTaskKey;
         if ( currentTaskKey.length > 0 ){
-            this.setState({
-                task: tasks[currentTaskKey[0]][currentTaskKey[1]]
-            });
+            this.setState(tasks[currentTaskKey[0]][currentTaskKey[1]]);
         }
     },
+    handleCategoryChange: function (newCategoryId) {
+        this.setState({categoryId: newCategoryId})
+    },
+    handleBasicInfoChange: function (dataKey, newDataValue) {
+        switch (dataKey) {
+            case "title" :
+                this.setState({title: newDataValue});
+                break;
+            case "deploy" :
+                this.setState({deploy: newDataValue});
+                break;
+            case "origin" :
+                this.setState({origin: newDataValue});
+                break;
+        }
+    },
+    handleDetailChange: function (newDetailItems) {
+        this.setState({detail: newDetailItems});
+    },
     render: function () {
-        var task = this.state.task;
+        var task = this.state;
+        console.log(this.state);
         return (
             <form className="editor">
                 <h2 className="editor__title">Edit Task</h2>
-                <CategoryEdit categories={this.props.categories} categoryId={task.categoryId} />
-                <BasicInfoEdit title={task.title} deploy={task.deploy} origin={task.origin} />
-                <DetailEdit detail={task.detail} />
+                <CategoryEdit categories={this.props.categories} categoryId={task.categoryId} categoryChange={this.handleCategoryChange} />
+                <BasicInfoEdit title={task.title} deploy={task.deploy} origin={task.origin} basicInfoChange={this.handleBasicInfoChange} />
+                <DetailEdit detail={task.detail} detailItemsChange={this.handleDetailChange} />
                 <div className="table">
                     <a href="#" className="button table__item">추가</a>
                     <a href="#" className="button table__item">취소</a>
@@ -56,6 +72,7 @@ var CategoryEdit = React.createClass({
     },
     handleClickItem: function (categoryId) {
         this.setState({currentCategoryId: categoryId});
+        this.props.categoryChange(categoryId);
         this.toggleSelectBox(this);
     },
     toggleSelectBox: function (self) {
@@ -128,20 +145,6 @@ var BasicInfoEdit = React.createClass({
         deploy: PropTypes.any,
         origin: PropTypes.string
     },
-    getInitialState: function () {
-        return {
-            title: this.props.title,
-            deploy: this.props.deploy,
-            origin: this.props.origin
-        }
-    },
-    componentWillReceiveProps: function (nextProp) {
-        this.setState({
-            title: nextProp.title,
-            deploy: nextProp.deploy,
-            origin: nextProp.origin
-        });
-    },
     getDateByTimestamp: function (string) {
         var timestamp = new Date(string);
         if (timestamp.getTime() > 0) {
@@ -151,14 +154,20 @@ var BasicInfoEdit = React.createClass({
         }
     },
     handleChangeTitle: function (event) {
-        this.setState({ title: event.target.valeu });
+        this.props.basicInfoChange("title", event.target.value);
+    },
+    handleChangeDeploy: function (event) {
+        this.props.basicInfoChange("deploy", event.target.value);
+    },
+    handleChangeOrigin: function (event) {
+        this.props.basicInfoChange("origin", event.target.value);
     },
     render: function () {
         return (
             <section className="editor__section">
-                <textarea className="editor__textarea" cols="30" rows="4" placeholder="제목" value={this.state.title} onChange={this.handleChangeTitle} />
-                <input className="editor__input" type="text" placeholder="배포 20160218" value={this.getDateByTimestamp(this.state.deploy)} />
-                <input className="editor__input" type="text" placeholder="출처 GRAFOLIO-3000" value={this.state.origin} />
+                <textarea className="editor__textarea" cols="30" rows="4" placeholder="제목" value={this.props.title} onChange={this.handleChangeTitle} />
+                <input className="editor__input" type="text" placeholder="배포 20160218" value={this.getDateByTimestamp(this.props.deploy)} onChange={this.handleChangeDeploy} />
+                <input className="editor__input" type="text" placeholder="출처 GRAFOLIO-3000" value={this.props.origin} onChange={this.handleChangeOrigin} />
             </section>
         );
     }
@@ -179,17 +188,19 @@ var DetailEdit = React.createClass({
     addDetailItem: function (callback) {
         var input = this.refs.detailItemText;
         var inputVal = input.value;
+        var newItems = this.state.items;
         var newItem;
         if (inputVal == "") {
+            console.error("내용이 없습니다.");
             return;
         } else {
             newItem = {
                 text: inputVal,
                 checked: false
             };
-            this.setState({
-                items: this.state.items.concat(newItem)
-            });
+            newItems = newItems.concat(newItem);
+            this.setState({items: newItems});
+            this.props.detailItemsChange(newItems);
             callback.apply(this);
         }
     },
@@ -197,7 +208,9 @@ var DetailEdit = React.createClass({
         this.refs.detailItemText.value = "";
     },
     handleClickDetailItem: function (newDetailItems) {
-        this.setState({items: newDetailItems});
+        var newItems = newDetailItems;
+        this.setState({items: newItems});
+        this.props.detailItemsChange(newItems);
     },
     render: function () {
         return (

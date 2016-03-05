@@ -42,8 +42,12 @@ var TaskFlow = React.createClass({
 });
 
 // Set Database
-var myTasks = JSON.parse(window.localStorage.tasks);
-var myCategories = JSON.parse(window.localStorage.categories);
+var myTasks = {};
+var myCategories = {};
+if (localStorage.length > 0){
+    myTasks = JSON.parse(window.localStorage.tasks);
+    myCategories = JSON.parse(window.localStorage.categories);
+}
 
 // Render
 ReactDOM.render(
