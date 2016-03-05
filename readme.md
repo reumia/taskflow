@@ -16,6 +16,7 @@
 * 키보드 단축키 만들기
 * DetailEdit
     * 추가 시에 Checked State 초기화 되는 이슈
+* Index Key 값 생성 : UUID
 
 #### React
 
