@@ -42,7 +42,7 @@ var TaskEditor = React.createClass({
     },
     render: function () {
         var task = this.state;
-        console.log(this.state);
+        // console.log(this.state);
         return (
             <form className="editor">
                 <h2 className="editor__title">Edit Task</h2>
@@ -145,28 +145,30 @@ var BasicInfoEdit = React.createClass({
         deploy: PropTypes.any,
         origin: PropTypes.string
     },
-    getDateByTimestamp: function (string) {
-        var timestamp = new Date(string);
-        if (timestamp.getTime() > 0) {
-            return timestamp.toLocaleDateString();
-        } else {
-            return string;
-        }
-    },
     handleChangeTitle: function (event) {
         this.props.basicInfoChange("title", event.target.value);
     },
     handleChangeDeploy: function (event) {
-        this.props.basicInfoChange("deploy", event.target.value);
+        var date = this.validateDate(event.target.value);
+        this.props.basicInfoChange("deploy", date);
     },
     handleChangeOrigin: function (event) {
         this.props.basicInfoChange("origin", event.target.value);
+    },
+    validateDate: function (string) {
+        var newString;
+        if (/[\D-]/.test(string)) {
+            newString = string.slice(0, -1);
+            return newString;
+        } else {
+            return string;
+        }
     },
     render: function () {
         return (
             <section className="editor__section">
                 <textarea className="editor__textarea" cols="30" rows="4" placeholder="제목" value={this.props.title} onChange={this.handleChangeTitle} />
-                <input className="editor__input" type="text" placeholder="배포 20160218" value={this.getDateByTimestamp(this.props.deploy)} onChange={this.handleChangeDeploy} />
+                <input className="editor__input" type="text" placeholder="배포 20160218" value={this.props.deploy} onChange={this.handleChangeDeploy} />
                 <input className="editor__input" type="text" placeholder="출처 GRAFOLIO-3000" value={this.props.origin} onChange={this.handleChangeOrigin} />
             </section>
         );

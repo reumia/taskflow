@@ -40,21 +40,12 @@ var Task = React.createClass({
     getInitialState: function () {
         return this.props.data
     },
-    getDateByTimeStamp: function (string) {
-        var timestamp = new Date(string);
-        if (timestamp.getTime() > 0) {
-            return timestamp.toLocaleDateString();
-        } else {
-            return string;
-        }
-    },
     render: function () {
         var data = this.state;
         var categories = this.props.categories;
         var categoryId = data.categoryId;
         var inlineStyleColor = {color: categories[categoryId].color};
         var inlineStyleBackgroundColor = {backgroundColor: categories[categoryId].color};
-        var deployDate = this.getDateByTimeStamp(data.deploy);
         var stickerNodes = data.detail.map(function (sticker) {
             return (
                 <i className="sticker" data-checked={sticker.checked} data-text={sticker.text}></i>
@@ -67,7 +58,7 @@ var Task = React.createClass({
                     <em>{categories[categoryId].name}</em>
                 </h3>
                 <h2 className="task__title">{data.title}</h2>
-                <div className="task__deploy">배포<i>{deployDate}</i></div>
+                <div className="task__deploy">배포<i>{data.deploy}</i></div>
                 <div className="task__origin">출처<i>{data.origin}</i></div>
                 <div className="task__detail">상세
                     <div className="sticker-wrap">
