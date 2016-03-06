@@ -4,6 +4,7 @@ var ReactDOM = require('react-dom');
 var ClassNames = require('classnames');
 var TaskWrap = require('./TaskWrap');
 var TaskEditor = require('./TaskEditor');
+var CategoryConfig = require('./CategoryConfig');
 
 // TaskFlow
 var TaskFlow = React.createClass({
@@ -14,7 +15,8 @@ var TaskFlow = React.createClass({
     getInitialState: function () {
         return {
             data: [],
-            currentTaskKey: []
+            currentTaskKey: [],
+            isCategoryConfigActivated: false
         };
     },
     componentDidMount: function () {
@@ -22,6 +24,13 @@ var TaskFlow = React.createClass({
     },
     handleClickTask: function (node, event) {
         this.setState({currentTaskKey: node});
+    },
+    toggleCategoryConfig: function () {
+        if (this.state.isCategoryConfigActivated) {
+            this.setState({isCategoryConfigActivated: false});
+        } else {
+            this.setState({isCategoryConfigActivated: true});
+        }
     },
     render: function () {
         var categories = this.props.categories;
@@ -34,8 +43,9 @@ var TaskFlow = React.createClass({
         }.bind(this));
         return (
             <div className="taskflow">
-                <aside className="taskflow__aside"><TaskEditor categories={categories} tasks={tasks} currentTaskKey={this.state.currentTaskKey} /></aside>
+                <aside className="taskflow__aside"><TaskEditor categories={categories} tasks={tasks} currentTaskKey={this.state.currentTaskKey} activeCategoryConfig={this.toggleCategoryConfig} /></aside>
                 <section className="taskflow__body">{taskWrapNodes}</section>
+                <CategoryConfig categories={categories} isActivated={this.state.isCategoryConfigActivated} deactiveLayer={this.toggleCategoryConfig} />
             </div>
         );
     }

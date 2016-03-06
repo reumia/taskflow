@@ -1,6 +1,5 @@
 'use strict';
 var React = require('react');
-var ClassNames = require('classnames');
 
 // TaskWrap
 var TaskWrap = React.createClass({

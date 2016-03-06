@@ -46,7 +46,7 @@ var TaskEditor = React.createClass({
         return (
             <form className="editor">
                 <h2 className="editor__title">Edit Task</h2>
-                <CategoryEdit categories={this.props.categories} categoryId={task.categoryId} categoryChange={this.handleCategoryChange} />
+                <CategoryEdit categories={this.props.categories} activeCategoryConfig={this.props.activeCategoryConfig} categoryId={task.categoryId} categoryChange={this.handleCategoryChange} />
                 <BasicInfoEdit title={task.title} deploy={task.deploy} origin={task.origin} basicInfoChange={this.handleBasicInfoChange} />
                 <DetailEdit detail={task.detail} detailItemsChange={this.handleDetailChange} />
                 <div className="table">
@@ -99,7 +99,7 @@ var CategoryEdit = React.createClass({
                     <a href="#" className="button table__item" onClick={this.handleClickSelect} style={buttonStyle}>
                         <i className="fa fa-chevron-down"></i> {buttonText}
                     </a>
-                    <a href="#" className="button table__item" onClick={this.handleClickConfig}>
+                    <a href="#" className="button table__item" onClick={this.props.activeCategoryConfig}>
                         <i className="fa fa-gear"></i> 카테고리 관리
                     </a>
                 </div>
