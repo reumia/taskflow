@@ -114,10 +114,10 @@ input.button--block {
     box-sizing: border-box;
     padding: $spacing-unit;
     left: 50%;
-    top: 30%;
+    top: 20%;
     max-width: $layer-max-width;
     min-width: $layer-min-width;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 0);
     background-color: #fff;
     border-radius: 4px;
     box-shadow: 0 1px 4px rgba(0,0,0,.4);
