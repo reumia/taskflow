@@ -2166,28 +2166,60 @@ a,
   outline: none;
   -webkit-appearance: none;
   display: inline-block; }
-  .button:hover {
+  .button:hover, .button:focus {
     color: #333;
     border-color: gray;
     background-color: #fcfcfc; }
   .button.active {
-    color: royalblue;
-    border-color: royalblue;
-    background-color: #f6f8fe; }
-  .button:hover {
-    color: #333;
-    border-color: gray;
-    background-color: #fcfcfc; }
-  .button.active {
-    color: royalblue;
-    border-color: royalblue;
-    background-color: #f6f8fe; }
+    color: royalblue !important;
+    border-color: royalblue !important;
+    background-color: #f6f8fe !important; }
 
 .button--block {
   display: block; }
 
 input.button--block {
   width: 100%; }
+
+.input {
+  border-width: 1px;
+  border-style: solid;
+  border-color: #d3d3d3;
+  transition: border 0.1s, background 0.1s, color 0.1s;
+  box-sizing: border-box;
+  padding: 10px;
+  border-radius: 0;
+  background-color: #fff;
+  color: gray;
+  font-size: 14px;
+  text-decoration: none;
+  outline: none;
+  -webkit-appearance: none;
+  display: block;
+  width: 100%; }
+  .input:focus, .input:hover {
+    color: #333 !important;
+    border-color: gray !important;
+    background-color: #fcfcfc !important; }
+  .input.active {
+    color: royalblue !important;
+    border-color: royalblue !important;
+    background-color: #f6f8fe !important; }
+
+.input-group {
+  border-width: 1px 1px 1px 0;
+  border-style: solid;
+  border-color: #d3d3d3;
+  margin: 10px 0; }
+  .input-group > textarea,
+  .input-group > input,
+  .input-group > select {
+    border-width: 0 0 0 1px;
+    border-style: solid;
+    border-color: #d3d3d3; }
+  .input-group > .button--block {
+    margin: 0 -1px 0 0;
+    text-align: center; }
 
 .table {
   display: table;
@@ -2217,7 +2249,7 @@ input.button--block {
       border-color: gray;
       transition: opacity 0.1s;
       opacity: 0; }
-    .table .table__item.active:before, .table .table__item:hover:before {
+    .table .table__item.active:before, .table .table__item:focus:before, .table .table__item:hover:before {
       opacity: 1; }
     .table .table__item.active:before {
       border-color: royalblue; }
@@ -2246,14 +2278,14 @@ input.button--block {
     border-color: #d3d3d3;
     display: block;
     margin-top: -1px; }
-    .selectbox .selectbox__item:hover {
+    .selectbox .selectbox__item:hover, .selectbox .selectbox__item:focus {
       color: #333;
       border-color: gray;
       background-color: #fcfcfc; }
     .selectbox .selectbox__item.active {
-      color: royalblue;
-      border-color: royalblue;
-      background-color: #f6f8fe; }
+      color: royalblue !important;
+      border-color: royalblue !important;
+      background-color: #f6f8fe !important; }
   .selectbox.active {
     display: block; }
 
@@ -2274,7 +2306,7 @@ input.button--block {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5); }
-  .layer .layer__body {
+  .layer .layer__content {
     position: absolute;
     z-index: 10;
     box-sizing: border-box;
@@ -2287,6 +2319,11 @@ input.button--block {
     background-color: #fff;
     border-radius: 4px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4); }
+  .layer .layer__title {
+    margin: 0 0 20px;
+    color: royalblue;
+    font-size: 12px;
+    font-weight: bold; }
 
 .layer.active {
   display: block; }
@@ -2369,15 +2406,15 @@ input.button--block {
   .editor .editor__input:hover,
   .editor .editor__item:focus,
   .editor .editor__item:hover {
-    color: #333;
-    border-color: gray;
-    background-color: #fcfcfc; }
+    color: #333 !important;
+    border-color: gray !important;
+    background-color: #fcfcfc !important; }
   .editor .editor__textarea.active,
   .editor .editor__input.active,
   .editor .editor__item.active {
-    color: royalblue;
-    border-color: royalblue;
-    background-color: #f6f8fe; }
+    color: royalblue !important;
+    border-color: royalblue !important;
+    background-color: #f6f8fe !important; }
 
 .editor .editor__item {
   position: relative; }
@@ -2406,29 +2443,28 @@ input.button--block {
 .editor .editor__textarea {
   resize: none; }
 
-.editor__section {
+.editor .editor__section {
   border-width: 1px 1px 1px 0;
   border-style: solid;
   border-color: #d3d3d3;
   margin: 10px 0; }
-  .editor__section .editor__textarea,
-  .editor__section .editor__input,
-  .editor__section .editor__select,
-  .editor__section .editor__item {
+  .editor .editor__section > textarea,
+  .editor .editor__section > input,
+  .editor .editor__section > select {
     border-width: 0 0 0 1px;
     border-style: solid;
     border-color: #d3d3d3; }
-  .editor__section .button--block {
+  .editor .editor__section > .button--block {
     margin: 0 -1px 0 0;
     text-align: center; }
-  .editor__section.category {
+  .editor .editor__section.category {
     position: relative;
     border-width: 0; }
-    .editor__section.category .editor__input {
+    .editor .editor__section.category .editor__input {
       text-align: left;
       border-width: 1px !important;
       margin-left: -1px; }
-    .editor__section.category .selectbox {
+    .editor .editor__section.category .selectbox {
       position: absolute;
       left: 0;
       right: 0;
@@ -2437,14 +2473,18 @@ input.button--block {
       -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
       -moz-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); }
-      .editor__section.category .selectbox .selectbox__item {
+      .editor .editor__section.category .selectbox .selectbox__item {
         color: #cccccc;
         font-size: 10px;
         font-weight: bold;
         text-transform: uppercase;
         cursor: pointer; }
-        .editor__section.category .selectbox .selectbox__item .sticker {
+        .editor .editor__section.category .selectbox .selectbox__item .sticker {
           margin-right: 4px; }
+  .editor .editor__section .detail-group .editor__item {
+    border-width: 0 0 0 1px;
+    border-style: solid;
+    border-color: #d3d3d3; }
 
 .task {
   border-width: 1px;

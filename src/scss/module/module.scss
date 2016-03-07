@@ -16,16 +16,6 @@
 .button {
   @include form-common();
   display: inline-block;
-  &:hover {
-    color: $color-font;
-    border-color: $color-font-lighter;
-    background-color: $color-background-hover;
-  }
-  &.active {
-    color: $color-brand;
-    border-color: $color-brand;
-    background-color: $color-brand-lighter;
-  }
 }
 .button--block {
   display: block;
@@ -34,6 +24,13 @@ input.button--block {
   width: 100%;
 }
 
+// 인풋
+.input {
+  @include form-common(input);
+}
+.input-group {
+  @include form-group();
+}
 
 // 100% 너비 좌우 정렬
 .table {
@@ -63,6 +60,7 @@ input.button--block {
       opacity: 0;
     }
     &.active,
+    &:focus,
     &:hover {
       &:before {
         opacity: 1;
@@ -110,7 +108,7 @@ input.button--block {
     height: 100%;
     background: rgba(0,0,0,.5);
   }
-  .layer__body {
+  .layer__content {
     position: absolute;
     z-index: 10;
     box-sizing: border-box;
@@ -123,6 +121,12 @@ input.button--block {
     background-color: #fff;
     border-radius: 4px;
     box-shadow: 0 1px 4px rgba(0,0,0,.4);
+  }
+  .layer__title {
+    margin: 0 0 $spacing-unit;
+    color: $color-brand;
+    font-size: $font-size-smaller;
+    font-weight: bold;
   }
 }
 .layer.active {

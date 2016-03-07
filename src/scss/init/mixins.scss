@@ -42,23 +42,40 @@
   outline: none;
   -webkit-appearance: none;
   @if $type == button {
-    &:hover {
+    &:hover,
+    &:focus {
       color: $color-font;
       border-color: $color-font-lighter;
       background-color: $color-background-hover;
     }
   }
   @elseif $type == input {
+    display: block;
+    width: 100%;
     &:focus,
     &:hover {
-      color: $color-font;
-      border-color: $color-font-lighter;
-      background-color: $color-background-hover;
+      color: $color-font!important;
+      border-color: $color-font-lighter!important;
+      background-color: $color-background-hover!important;
     }
   }
   &.active {
-     color: $color-brand;
-     border-color: $color-brand;
-     background-color: $color-brand-lighter;
+     color: $color-brand!important;
+     border-color: $color-brand!important;
+     background-color: $color-brand-lighter!important;
+  }
+}
+
+@mixin form-group () {
+  @include border-unit(1px 1px 1px 0);
+  margin: $spacing-unit-half 0;
+  > textarea,
+  > input,
+  > select {
+    @include border-unit(0 0 0 1px);
+  }
+  > .button--block {
+    margin: 0 -1px 0 0;
+    text-align: center;
   }
 }
