@@ -24,7 +24,7 @@ var TaskEditor = React.createClass({
     handleCategoryChange: function (newCategoryId) {
         this.setState({categoryId: newCategoryId})
     },
-    handleBasicInfoChange: function (dataKey, newDataValue) {
+    handleBasicInfoChange: function () {
         console.log(this.state);
     },
     render: function () {
@@ -147,8 +147,6 @@ var BasicInfoEdit = React.createClass({
             case "deploy" : this.setState({ deploy: event.target.value }); break;
             case "origin" : this.setState({ origin: event.target.value }); break;
         }
-        //console.log(this.state);
-        //this.props.basicInfoChange();
     },
     validateDate: function (string) {
         var newString;
@@ -204,16 +202,21 @@ var DetailEdit = React.createClass({
     clearInput: function () {
         this.refs.detailItemText.value = "";
     },
+    setDetailItemState : function (itemKey, newDetailItem) {
+        var newItems = this.state.items;
+        newItems[itemKey] = newDetailItem;
+        this.setState({items: newItems});
+    },
     render: function () {
         return (
             <section className="editor__section detail">
                 <input ref="detailItemText" type="text" className="editor__input" placeholder="상세" />
                 <a href="#" className="button button--block" onClick={this.addDetailItem.bind(this, this.clearInput)}>추가</a>
-                <DetailItems items={this.state.items} />
+                <DetailItems items={this.state.items} detailItemClick={this.setDetailItemState} />
             </section>
         );
     }
-})
+});
 
 // DetailItems
 var DetailItems = React.createClass({
@@ -221,7 +224,7 @@ var DetailItems = React.createClass({
         var items = this.props.items;
         var detailItemNodes = Object.keys(items).map(function(key){
             return (
-                <DetailItem key={key} itemKey={key} data={items[key]} />
+                <DetailItem key={key} itemKey={key} data={items[key]} detailItemClick={this.props.detailItemClick}/>
             );
         }.bind(this));
         return (
@@ -243,11 +246,21 @@ var DetailItem = React.createClass({
     handleClick: function (e) {
         e.preventDefault();
         var itemKey = this.props.itemKey;
+        var newState;
         if (this.state.checked == true) {
-            this.setState({checked: false});
+            newState = {
+                text: this.state.text,
+                checked: false
+            };
+            this.setState(newState);
         } else {
-            this.setState({checked: true});
+            newState = {
+                text: this.state.text,
+                checked: true
+            };
+            this.setState(newState);
         }
+        this.props.detailItemClick(itemKey, newState);
     },
     render: function () {
         var data = this.state;
