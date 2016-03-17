@@ -25,30 +25,16 @@ var TaskEditor = React.createClass({
         this.setState({categoryId: newCategoryId})
     },
     handleBasicInfoChange: function (dataKey, newDataValue) {
-        switch (dataKey) {
-            case "title" :
-                this.setState({title: newDataValue});
-                break;
-            case "deploy" :
-                this.setState({deploy: newDataValue});
-                break;
-            case "origin" :
-                this.setState({origin: newDataValue});
-                break;
-        }
-    },
-    handleDetailChange: function (newDetailItems) {
-        this.setState({detail: newDetailItems});
+        console.log(this.state);
     },
     render: function () {
         var task = this.state;
-        // console.log(this.state);
         return (
             <form className="editor">
                 <h2 className="editor__title">Edit Task</h2>
                 <CategoryEdit categories={this.props.categories} activeCategoryConfig={this.props.activeCategoryConfig} categoryId={task.categoryId} categoryChange={this.handleCategoryChange} />
                 <BasicInfoEdit title={task.title} deploy={task.deploy} origin={task.origin} basicInfoChange={this.handleBasicInfoChange} />
-                <DetailEdit detail={task.detail} detailItemsChange={this.handleDetailChange} />
+                <DetailEdit detail={task.detail} />
                 <div className="table">
                     <a href="#" className="button table__item">추가</a>
                     <a href="#" className="button table__item">취소</a>
@@ -140,20 +126,28 @@ var CategorySelectbox = React.createClass({
 
 // BasicInfoEdit
 var BasicInfoEdit = React.createClass({
-    propTypes: {
-        items: PropTypes.array,
-        deploy: PropTypes.any,
-        origin: PropTypes.string
+    getInitialState: function () {
+        return {
+            title: this.props.title,
+            deploy: this.props.deploy,
+            origin: this.props.origin
+        }
     },
-    handleChangeTitle: function (event) {
-        this.props.basicInfoChange("title", event.target.value);
+    componentWillReceiveProps: function (nextProp) {
+        this.setState({
+            title: nextProp.title,
+            deploy: nextProp.deploy,
+            origin: nextProp.origin
+        })
     },
-    handleChangeDeploy: function (event) {
-        var date = this.validateDate(event.target.value);
-        this.props.basicInfoChange("deploy", date);
-    },
-    handleChangeOrigin: function (event) {
-        this.props.basicInfoChange("origin", event.target.value);
+    handleChange: function (node, event) {
+        switch (node) {
+            case "title" : this.setState({ title: event.target.value }); break;
+            case "deploy" : this.setState({ deploy: event.target.value }); break;
+            case "origin" : this.setState({ origin: event.target.value }); break;
+        }
+        //console.log(this.state);
+        //this.props.basicInfoChange();
     },
     validateDate: function (string) {
         var newString;
@@ -167,9 +161,9 @@ var BasicInfoEdit = React.createClass({
     render: function () {
         return (
             <section className="editor__section">
-                <textarea className="editor__textarea" cols="30" rows="4" placeholder="제목" value={this.props.title} onChange={this.handleChangeTitle} />
-                <input className="editor__input" type="text" placeholder="배포 20160218" value={this.props.deploy} onChange={this.handleChangeDeploy} />
-                <input className="editor__input" type="text" placeholder="출처 GRAFOLIO-3000" value={this.props.origin} onChange={this.handleChangeOrigin} />
+                <textarea className="editor__textarea" cols="30" rows="4" placeholder="제목" value={this.state.title} onChange={this.handleChange.bind(this, "title")} />
+                <input className="editor__input" type="text" placeholder="배포 20160218" value={this.state.deploy} onChange={this.handleChange.bind(this, "deploy")} />
+                <input className="editor__input" type="text" placeholder="출처 GRAFOLIO-3000" value={this.state.origin} onChange={this.handleChange.bind(this, "origin")} />
             </section>
         );
     }
@@ -209,17 +203,12 @@ var DetailEdit = React.createClass({
     clearInput: function () {
         this.refs.detailItemText.value = "";
     },
-    handleClickDetailItem: function (newDetailItems) {
-        var newItems = newDetailItems;
-        this.setState({items: newItems});
-        this.props.detailItemsChange(newItems);
-    },
     render: function () {
         return (
             <section className="editor__section detail">
                 <input ref="detailItemText" type="text" className="editor__input" placeholder="상세" />
                 <a href="#" className="button button--block" onClick={this.addDetailItem.bind(this, this.clearInput)}>추가</a>
-                <DetailItems items={this.state.items} clickDetailItem={this.handleClickDetailItem} />
+                <DetailItems items={this.state.items} />
             </section>
         );
     }
@@ -227,16 +216,11 @@ var DetailEdit = React.createClass({
 
 // DetailItems
 var DetailItems = React.createClass({
-    handleClickDetailItem: function (itemKey, detailItemState) {
-        var newItems = this.props.items;
-        newItems[itemKey] = detailItemState;
-        this.props.clickDetailItem(newItems);
-    },
     render: function () {
         var items = this.props.items;
         var detailItemNodes = Object.keys(items).map(function(key){
             return (
-                <DetailItem key={key} itemKey={key} data={items[key]} clickDetailItem={this.handleClickDetailItem} />
+                <DetailItem key={key} itemKey={key} data={items[key]} />
             );
         }.bind(this));
         return (
@@ -258,15 +242,11 @@ var DetailItem = React.createClass({
     handleClick: function (e) {
         e.preventDefault();
         var itemKey = this.props.itemKey;
-        var newState = this.state;
         if (this.state.checked == true) {
-            newState.checked = false;
-            this.setState(newState);
+            this.setState({checked: false});
         } else {
-            newState.checked = true;
-            this.setState(newState)
+            this.setState({checked: true});
         }
-        this.props.clickDetailItem(itemKey, newState);
     },
     render: function () {
         var data = this.state;
