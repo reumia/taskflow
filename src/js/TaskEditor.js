@@ -29,6 +29,7 @@ var TaskEditor = React.createClass({
     },
     render: function () {
         var task = this.state;
+        var submitStr = this.props.currentTaskKey ? "수정" : "추가";
         return (
             <form className="editor">
                 <h2 className="editor__title">Edit Task</h2>
@@ -36,7 +37,7 @@ var TaskEditor = React.createClass({
                 <BasicInfoEdit title={task.title} deploy={task.deploy} origin={task.origin} basicInfoChange={this.handleBasicInfoChange} />
                 <DetailEdit detail={task.detail} />
                 <div className="table">
-                    <a href="#" className="button table__item">추가</a>
+                    <a href="#" className="button table__item">{submitStr}</a>
                     <a href="#" className="button table__item">취소</a>
                 </div>
             </form>

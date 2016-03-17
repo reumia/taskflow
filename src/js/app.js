@@ -15,7 +15,7 @@ var TaskFlow = React.createClass({
     getInitialState: function () {
         return {
             data: [],
-            currentTaskKey: [],
+            currentTaskKey: false,
             isCategoryConfigActivated: false
         };
     },

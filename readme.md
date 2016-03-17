@@ -40,3 +40,6 @@
 #### 복기해볼 문제
 
 * [\[d609d9f\]](https://github.com/reumia/taskflow/commit/d609d9fade3d3fa5507ba6b597f0077c86434ecd) Detail Item 추가 시에 데이터가 초기화되던 이슈
+* [\[eafec4b\]]() Detail Item 체크정보 클릭하면 바로 반영되던 문제
+    * 변수 설정을 잘못함. 불필요한 데이터 변수화
+    * React는 따로 바인드해주지 않아도 각 컴퍼넌트의 State가 서로 업데이트 한다. 위에서 아래든, 아래에서 위든.
