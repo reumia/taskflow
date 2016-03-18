@@ -2181,7 +2181,9 @@ a,
 input.button--block {
   width: 100%; }
 
-.input {
+.textarea,
+.input,
+.item {
   border-width: 1px;
   border-style: solid;
   border-color: #d3d3d3;
@@ -2197,14 +2199,23 @@ input.button--block {
   -webkit-appearance: none;
   display: block;
   width: 100%; }
-  .input:focus, .input:hover {
-    color: #333 !important;
+  .textarea:focus, .textarea:hover,
+  .input:focus,
+  .input:hover,
+  .item:focus,
+  .item:hover {
+    color: #333;
     border-color: gray !important;
     background-color: #fcfcfc !important; }
-  .input.active {
+  .textarea.active,
+  .input.active,
+  .item.active {
     color: royalblue !important;
     border-color: royalblue !important;
     background-color: #f6f8fe !important; }
+
+.textarea {
+  resize: none; }
 
 .input-group {
   border-width: 1px 1px 1px 0;
@@ -2220,6 +2231,11 @@ input.button--block {
   .input-group > .button--block {
     margin: 0 -1px 0 0;
     text-align: center; }
+
+.item-group .item {
+  border-width: 0 0 0 1px;
+  border-style: solid;
+  border-color: #d3d3d3; }
 
 .table {
   display: table;
@@ -2289,6 +2305,18 @@ input.button--block {
   .selectbox.active {
     display: block; }
 
+.icon:before {
+  display: inline-block; }
+
+.icon--caret-down:before {
+  content: "\25bd"; }
+
+.icon--add:before {
+  content: "\002b"; }
+
+.icon--config:before {
+  content: "\002b"; }
+
 .layer {
   display: none;
   position: fixed;
@@ -2298,7 +2326,7 @@ input.button--block {
   right: 0;
   z-index: 100;
   transform-style: preserve-3d; }
-  .layer .layer__dimmed {
+  .layer__dimmed {
     position: absolute;
     z-index: 1;
     top: 0;
@@ -2306,7 +2334,7 @@ input.button--block {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5); }
-  .layer .layer__content {
+  .layer__content {
     position: absolute;
     z-index: 10;
     box-sizing: border-box;
@@ -2319,26 +2347,18 @@ input.button--block {
     background-color: #fff;
     border-radius: 4px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4); }
-  .layer .layer__title {
+  .layer__title {
     margin: 0 0 20px;
     color: royalblue;
     font-size: 12px;
     font-weight: bold; }
-
-.layer.active {
-  display: block; }
-
-.icon:before {
-  display: inline-block; }
-
-.icon--caret-down:before {
-  content: "\25bd"; }
-
-.icon--add:before {
-  content: "\002b"; }
-
-.icon--config:before {
-  content: "\002b"; }
+  .layer.active {
+    display: block; }
+  .layer--config-category .item {
+    font-size: 10px;
+    font-weight: bold; }
+    .layer--config-category .item .sticker {
+      margin-right: 10px; }
 
 .taskflow {
   position: relative;
@@ -2377,94 +2397,34 @@ input.button--block {
   border-color: #e0e0e0;
   margin: 10px 0; }
 
-.editor .editor__title {
+.editor__title {
   margin-bottom: 20px;
   font-size: 18px;
   font-weight: bold;
   text-transform: uppercase; }
 
-.editor .editor__textarea,
-.editor .editor__input,
-.editor .editor__item {
-  border-width: 1px;
-  border-style: solid;
-  border-color: #d3d3d3;
-  transition: border 0.1s, background 0.1s, color 0.1s;
-  box-sizing: border-box;
-  padding: 10px;
-  border-radius: 0;
-  background-color: #fff;
-  color: gray;
-  font-size: 14px;
-  text-decoration: none;
-  outline: none;
-  -webkit-appearance: none;
-  display: block;
-  width: 100%; }
-  .editor .editor__textarea:focus, .editor .editor__textarea:hover,
-  .editor .editor__input:focus,
-  .editor .editor__input:hover,
-  .editor .editor__item:focus,
-  .editor .editor__item:hover {
-    color: #333 !important;
-    border-color: gray !important;
-    background-color: #fcfcfc !important; }
-  .editor .editor__textarea.active,
-  .editor .editor__input.active,
-  .editor .editor__item.active {
-    color: royalblue !important;
-    border-color: royalblue !important;
-    background-color: #f6f8fe !important; }
-
-.editor .editor__item {
-  position: relative; }
-  .editor .editor__item:before {
-    content: "\22c1";
-    box-sizing: border-box;
-    position: absolute;
-    top: 10px;
-    left: -14px;
-    width: 14px;
-    padding: 1px 0 2px;
-    border-radius: 7px 0 0 7px;
-    color: royalblue;
-    background-color: #fff;
-    border-width: 1px;
-    border-style: solid;
-    border-color: royalblue;
-    font-size: 10px;
-    font-weight: bold;
-    text-align: center;
-    opacity: 0;
-    transition: opacity 0.1s; }
-  .editor .editor__item.active:before {
-    opacity: 1; }
-
-.editor .editor__textarea {
-  resize: none; }
-
-.editor .editor__section {
+.editor__section {
   border-width: 1px 1px 1px 0;
   border-style: solid;
   border-color: #d3d3d3;
   margin: 10px 0; }
-  .editor .editor__section > textarea,
-  .editor .editor__section > input,
-  .editor .editor__section > select {
+  .editor__section > textarea,
+  .editor__section > input,
+  .editor__section > select {
     border-width: 0 0 0 1px;
     border-style: solid;
     border-color: #d3d3d3; }
-  .editor .editor__section > .button--block {
+  .editor__section > .button--block {
     margin: 0 -1px 0 0;
     text-align: center; }
-  .editor .editor__section.category {
+  .editor__section.category {
     position: relative;
     border-width: 0; }
-    .editor .editor__section.category .editor__input {
+    .editor__section.category .input {
       text-align: left;
       border-width: 1px !important;
       margin-left: -1px; }
-    .editor .editor__section.category .selectbox {
+    .editor__section.category .selectbox {
       position: absolute;
       left: 0;
       right: 0;
@@ -2473,18 +2433,14 @@ input.button--block {
       -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
       -moz-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); }
-      .editor .editor__section.category .selectbox .selectbox__item {
+      .editor__section.category .selectbox .selectbox__item {
         color: #cccccc;
         font-size: 10px;
         font-weight: bold;
         text-transform: uppercase;
         cursor: pointer; }
-        .editor .editor__section.category .selectbox .selectbox__item .sticker {
+        .editor__section.category .selectbox .selectbox__item .sticker {
           margin-right: 4px; }
-  .editor .editor__section .detail-group .editor__item {
-    border-width: 0 0 0 1px;
-    border-style: solid;
-    border-color: #d3d3d3; }
 
 .task {
   border-width: 1px;

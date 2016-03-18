@@ -54,7 +54,7 @@
     width: 100%;
     &:focus,
     &:hover {
-      color: $color-font!important;
+      color: $color-font;
       border-color: $color-font-lighter!important;
       background-color: $color-background-hover!important;
     }
@@ -77,5 +77,32 @@
   > .button--block {
     margin: 0 -1px 0 0;
     text-align: center;
+  }
+}
+
+@mixin item-common () {
+  position: relative;
+  &:before {
+    content: "\22c1";
+    box-sizing: border-box;
+    position: absolute;
+    top: $spacing-unit-half;
+    left: -($checkbox-unit);
+    width: $checkbox-unit;
+    padding: 1px 0 2px;
+    border-radius: ($checkbox-unit/2) 0 0 ($checkbox-unit/2);
+    color: $color-brand;
+    background-color: #fff;
+    @include border-unit(1px, $color-brand);
+    font-size: $font-size-smallest;
+    font-weight: bold;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.1s;
+  }
+  &.active {
+    &:before {
+      opacity: 1;
+    }
   }
 }

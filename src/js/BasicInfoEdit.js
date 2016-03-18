@@ -18,10 +18,10 @@ var BasicInfoEdit = React.createClass({
     },
     render: function () {
         return (
-            <section className="editor__section">
-                <textarea className="editor__textarea" cols="30" rows="4" placeholder="제목" value={this.props.title} onChange={this.handleChange.bind(this, "title")} />
-                <input className="editor__input" type="text" placeholder="배포 20160218" value={this.props.deploy} onChange={this.handleChange.bind(this, "deploy")} />
-                <input className="editor__input" type="text" placeholder="출처 GRAFOLIO-3000" value={this.props.origin} onChange={this.handleChange.bind(this, "origin")} />
+            <section className="editor__section input-group">
+                <textarea className="textarea" cols="30" rows="4" placeholder="제목" value={this.props.title} onChange={this.handleChange.bind(this, "title")} />
+                <input className="input" type="text" placeholder="배포 20160218" value={this.props.deploy} onChange={this.handleChange.bind(this, "deploy")} />
+                <input className="input" type="text" placeholder="출처 GRAFOLIO-3000" value={this.props.origin} onChange={this.handleChange.bind(this, "origin")} />
             </section>
         );
     }

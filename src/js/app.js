@@ -35,7 +35,6 @@ var TaskFlow = React.createClass({
     render: function () {
         var categories = this.props.categories;
         var tasks = this.props.tasks;
-        console.log(tasks);
         var taskWrapNodes = Object.keys(tasks).map(function (key) {
             var task = tasks[key];
             return (

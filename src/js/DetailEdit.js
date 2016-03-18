@@ -33,8 +33,8 @@ var DetailEdit = React.createClass({
     },
     render: function () {
         return (
-            <section className="editor__section detail">
-                <input ref="detailItemText" type="text" className="editor__input" placeholder="상세" />
+            <section className="editor__section input-group">
+                <input ref="detailItemText" type="text" className="input" placeholder="상세" />
                 <a href="#" className="button button--block" onClick={this.addDetailItem}>추가</a>
                 <DetailItems items={this.props.detail} detailItemClick={this.props.detailItemClick} />
             </section>
@@ -55,7 +55,7 @@ var DetailItems = React.createClass({
             );
         }.bind(this));
         return (
-            <div className="detail-group">
+            <div className="item-group">
                 {detailItemNodes}
             </div>
         );
@@ -80,7 +80,7 @@ var DetailItem = React.createClass({
     render: function () {
         var data = this.props.data;
         var detailItemClasses = ClassNames({
-            "editor__item": true,
+            "item": true,
             "active": data.checked
         });
         return (

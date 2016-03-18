@@ -3,81 +3,44 @@
     @include border-unit(1px 0 0, lighten($color-border, 5), dashed);
     margin: $spacing-unit-half 0;
   }
-  .editor__title {
-    margin-bottom: $spacing-unit;
-    font-size: $font-size-largest;
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-  .editor__textarea,
-  .editor__input,
-  .editor__item {
-    @include form-common(input);
-  }
-  .editor__item {
-    position: relative;
-    &:before {
-      content: "\22c1";
-      box-sizing: border-box;
-      position: absolute;
-      top: $spacing-unit-half;
-      left: -($checkbox-unit);
-      width: $checkbox-unit;
-      padding: 1px 0 2px;
-      border-radius: ($checkbox-unit/2) 0 0 ($checkbox-unit/2);
-      color: $color-brand;
-      background-color: #fff;
-      @include border-unit(1px, $color-brand);
-      font-size: $font-size-smallest;
+  & {
+    &__title {
+      margin-bottom: $spacing-unit;
+      font-size: $font-size-largest;
       font-weight: bold;
-      text-align: center;
-      opacity: 0;
-      transition: opacity 0.1s;
+      text-transform: uppercase;
     }
-    &.active {
-      &:before {
-        opacity: 1;
-      }
-    }
-  }
-  .editor__textarea {
-    resize: none;
-  }
 
-  // Editor Section
-  .editor__section {
-    @include form-group();
-    // Select Category Section
-    &.category {
-      position: relative;
-      border-width: 0;
-      .editor__input {
-        text-align: left;
-        border-width: 1px!important;
-        margin-left: -1px;
-      }
-      .selectbox {
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 42px;
-        z-index: 100;
-        @include box-shadow();
-        .selectbox__item {
-          color: $color-font-lightest;
-          font-size: $font-size-smallest;
-          font-weight: bold;
-          text-transform: uppercase;
-          cursor: pointer;
-          .sticker {
-            margin-right: 4px;
+    // Editor Section
+    &__section {
+      @include form-group();
+      // Select Category Section
+      &.category {
+        position: relative;
+        border-width: 0;
+        .input {
+          text-align: left;
+          border-width: 1px!important;
+          margin-left: -1px;
+        }
+        .selectbox {
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 42px;
+          z-index: 100;
+          @include box-shadow();
+          .selectbox__item {
+            color: $color-font-lightest;
+            font-size: $font-size-smallest;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            .sticker {
+              margin-right: 4px;
+            }
           }
         }
-      }
-    }
-    .detail-group {
-      .editor__item {
-        @include border-unit(0 0 0 1px);
       }
     }
   }

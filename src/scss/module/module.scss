@@ -25,11 +25,21 @@ input.button--block {
 }
 
 // 인풋
-.input {
+.textarea,
+.input,
+.item {
   @include form-common(input);
+}
+.textarea {
+  resize: none;
 }
 .input-group {
   @include form-group();
+}
+.item-group {
+  .item {
+    @include border-unit(0 0 0 1px);
+  }
 }
 
 // 100% 너비 좌우 정렬
@@ -87,48 +97,4 @@ input.button--block {
   &.active {
     display: block;
   }
-}
-
-// 레이어
-.layer {
-  display: none;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  transform-style: preserve-3d;
-  .layer__dimmed {
-    position: absolute;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,.5);
-  }
-  .layer__content {
-    position: absolute;
-    z-index: 10;
-    box-sizing: border-box;
-    padding: $spacing-unit;
-    left: 50%;
-    top: 20%;
-    max-width: $layer-max-width;
-    min-width: $layer-min-width;
-    transform: translate(-50%, 0);
-    background-color: #fff;
-    border-radius: 4px;
-    box-shadow: 0 1px 4px rgba(0,0,0,.4);
-  }
-  .layer__title {
-    margin: 0 0 $spacing-unit;
-    color: $color-brand;
-    font-size: $font-size-smaller;
-    font-weight: bold;
-  }
-}
-.layer.active {
-  display: block;
 }
