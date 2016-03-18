@@ -24,12 +24,17 @@ var TaskEditor = React.createClass({
     handleCategoryChange: function (newCategoryId) {
         this.setState({categoryId: newCategoryId})
     },
-    handleBasicInfoChange: function () {
-        console.log(this.state);
+    handleBasicInfoChange: function (node, value) {
+        switch (node) {
+            case "title" : this.setState({ title: value }); break;
+            case "deploy" : this.setState({ deploy: value }); break;
+            case "origin" : this.setState({ origin: value }); break;
+        }
     },
     render: function () {
         var task = this.state;
         var submitStr = this.props.currentTaskKey ? "수정" : "추가";
+        console.log(task);
         return (
             <form className="editor">
                 <h2 className="editor__title">Edit Task</h2>
@@ -58,6 +63,7 @@ var CategoryEdit = React.createClass({
         this.toggleSelectBox(this);
     },
     handleClickItem: function (categoryId) {
+        var categoryId = parseInt(categoryId);
         this.setState({currentCategoryId: categoryId});
         this.props.categoryChange(categoryId);
         this.toggleSelectBox(this);
@@ -127,26 +133,8 @@ var CategorySelectbox = React.createClass({
 
 // BasicInfoEdit
 var BasicInfoEdit = React.createClass({
-    getInitialState: function () {
-        return {
-            title: this.props.title,
-            deploy: this.props.deploy,
-            origin: this.props.origin
-        }
-    },
-    componentWillReceiveProps: function (nextProp) {
-        this.setState({
-            title: nextProp.title,
-            deploy: nextProp.deploy,
-            origin: nextProp.origin
-        })
-    },
     handleChange: function (node, event) {
-        switch (node) {
-            case "title" : this.setState({ title: event.target.value }); break;
-            case "deploy" : this.setState({ deploy: event.target.value }); break;
-            case "origin" : this.setState({ origin: event.target.value }); break;
-        }
+        this.props.basicInfoChange(node, event.target.value);
     },
     validateDate: function (string) {
         var newString;
@@ -160,9 +148,9 @@ var BasicInfoEdit = React.createClass({
     render: function () {
         return (
             <section className="editor__section">
-                <textarea className="editor__textarea" cols="30" rows="4" placeholder="제목" value={this.state.title} onChange={this.handleChange.bind(this, "title")} />
-                <input className="editor__input" type="text" placeholder="배포 20160218" value={this.state.deploy} onChange={this.handleChange.bind(this, "deploy")} />
-                <input className="editor__input" type="text" placeholder="출처 GRAFOLIO-3000" value={this.state.origin} onChange={this.handleChange.bind(this, "origin")} />
+                <textarea className="editor__textarea" cols="30" rows="4" placeholder="제목" value={this.props.title} onChange={this.handleChange.bind(this, "title")} />
+                <input className="editor__input" type="text" placeholder="배포 20160218" value={this.props.deploy} onChange={this.handleChange.bind(this, "deploy")} />
+                <input className="editor__input" type="text" placeholder="출처 GRAFOLIO-3000" value={this.props.origin} onChange={this.handleChange.bind(this, "origin")} />
             </section>
         );
     }
