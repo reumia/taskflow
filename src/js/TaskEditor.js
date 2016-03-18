@@ -28,10 +28,18 @@ var TaskEditor = React.createClass({
         this.setState({categoryId: newCategoryId})
     },
     handleBasicInfoChange: function (node, value) {
+        var date;
         switch (node) {
-            case "title" : this.setState({ title: value }); break;
-            case "deploy" : this.setState({ deploy: value }); break;
-            case "origin" : this.setState({ origin: value }); break;
+            case "title":
+                this.setState({ title: value });
+                break;
+            case "deploy":
+                date = this.validateDate(value);
+                this.setState({ deploy: date });
+                break;
+            case "origin":
+                this.setState({ origin: value });
+                break;
         }
     },
     handleAddDetailItem: function (itemString) {
@@ -47,10 +55,18 @@ var TaskEditor = React.createClass({
         newDetail[itemKey] = newItem;
         this.setState({detail: newDetail});
     },
+    validateDate: function (string) {
+        var newString;
+            if (/[\D-]/.test(string)) {
+                newString = string.slice(0, -1);
+                return newString;
+            } else {
+                return string;
+            }
+    },
     render: function () {
         var task = this.state;
         var submitStr = this.props.currentTaskKey ? "수정" : "추가";
-        console.log(task);
         return (
             <form className="editor">
                 <h2 className="editor__title">Edit Task</h2>

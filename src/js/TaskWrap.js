@@ -36,11 +36,8 @@ var TaskWrap = React.createClass({
 
 // Task
 var Task = React.createClass({
-    getInitialState: function () {
-        return this.props.data
-    },
     render: function () {
-        var data = this.state;
+        var data = this.props.data;
         var categories = this.props.categories;
         var categoryId = data.categoryId;
         var inlineStyleColor = {color: categories[categoryId].color};

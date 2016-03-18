@@ -7,8 +7,13 @@ var DetailEdit = React.createClass({
     addDetailItem: function () {
         var input = this.refs.detailItemText;
         var inputVal = input.value;
-        this.props.addDetailItem(inputVal);
-        this.clearInput();
+        if ( inputVal != "" && inputVal ) {
+            this.props.addDetailItem(inputVal);
+            this.clearInput();
+        } else {
+            console.error("인풋을 채워주세요");
+            return;
+        }
     },
     clearInput: function () {
         this.refs.detailItemText.value = "";

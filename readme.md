@@ -23,9 +23,7 @@
 * Input Group 내 버튼 위치
     * 추가 버튼 우측 처리
     * 삭제 버튼도 우측에 추가 (input 내 margin 값 있는 상태로)
-* ~~DetailItem~~
-    * ~~체크정보는 다른 태스크 선택시에 Task에 바로 반영됨~~
-    * ~~추가된 Task는 다른 태스크 선택 시에 사라짐~~
+* DetailItem : 체크정보만 Task에 바로 반영됨
 
 #### React
 
