@@ -68,19 +68,17 @@ var DetailItems = React.createClass({
 
 // DetailItem
 var DetailItem = React.createClass({
-    getInitialState: function () {
-        return this.props.data;
-    },
     handleClick: function (e) {
         e.preventDefault();
-        if (this.state.checked == true) {
-            this.setState({checked: false}, function () {
-                this.props.detailItemClick(this.state);
-            }.bind(this));
+        var newItem = {
+            text: this.props.data.text,
+            checked: false
+        };
+        if (this.props.data.checked == true) {
+            this.props.detailItemClick(newItem);
         } else {
-            this.setState({checked: true}, function () {
-                this.props.detailItemClick(this.state);
-            }.bind(this));
+            newItem.checked = true;
+            this.props.detailItemClick(newItem);
         }
     },
     render: function () {
