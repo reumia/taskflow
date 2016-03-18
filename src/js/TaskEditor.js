@@ -50,10 +50,8 @@ var TaskEditor = React.createClass({
         });
         this.setState({detail: newDetail});
     },
-    toggleDetailItem: function (itemKey, newItem) {
-        var newDetail = this.state.detail;
-        newDetail[itemKey] = newItem;
-        this.setState({detail: newDetail});
+    toggleDetailItem: function (newItems) {
+        this.setState({detail: newItems});
     },
     validateDate: function (string) {
         var newString;

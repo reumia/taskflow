@@ -31,11 +31,16 @@ var DetailEdit = React.createClass({
 
 // DetailItems
 var DetailItems = React.createClass({
+    handleDetailItemClick: function (node, newItem) {
+        var newItems = this.props.items;
+        newItems[node] = newItem;
+        this.props.detailItemClick(newItems);
+    },
     render: function () {
         var items = this.props.items;
         var detailItemNodes = Object.keys(items).map(function(key){
             return (
-                <DetailItem key={key} itemKey={key} data={items[key]} detailItemClick={this.props.detailItemClick}/>
+                <DetailItem key={key} data={items[key]} detailItemClick={this.handleDetailItemClick.bind(this, key)}/>
             );
         }.bind(this));
         return (
@@ -48,22 +53,20 @@ var DetailItems = React.createClass({
 
 // DetailItem
 var DetailItem = React.createClass({
+    getInitialState: function () {
+        return this.props.data;
+    },
     handleClick: function (e) {
         e.preventDefault();
-        var itemKey = this.props.itemKey;
-        var newItem = {};
-        if (this.props.data.checked == true) {
-            newItem = {
-                text: this.props.data.text,
-                checked: false
-            };
+        if (this.state.checked == true) {
+            this.setState({checked: false}, function () {
+                this.props.detailItemClick(this.state);
+            }.bind(this));
         } else {
-            newItem = {
-                text: this.props.data.text,
-                checked: true
-            };
+            this.setState({checked: true}, function () {
+                this.props.detailItemClick(this.state);
+            }.bind(this));
         }
-        this.props.detailItemClick(itemKey, newItem);
     },
     render: function () {
         var data = this.props.data;
