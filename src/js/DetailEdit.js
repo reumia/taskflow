@@ -7,8 +7,16 @@ var DetailEdit = React.createClass({
     addDetailItem: function () {
         var input = this.refs.detailItemText;
         var inputVal = input.value;
+        var newItems = this.props.detail;
+        var i = this.getObjectSize(newItems);
+        var newItem = {
+            text: "",
+            checked: false
+        };
         if ( inputVal != "" && inputVal ) {
-            this.props.addDetailItem(inputVal);
+            newItem.text = inputVal;
+            newItems[i] = newItem;
+            this.props.addDetailItem(newItems);
             this.clearInput();
         } else {
             console.error("인풋을 채워주세요");
@@ -17,6 +25,13 @@ var DetailEdit = React.createClass({
     },
     clearInput: function () {
         this.refs.detailItemText.value = "";
+    },
+    getObjectSize: function (obj) {
+        var size = 0, key;
+        for (key in obj) {
+            if (obj.hasOwnProperty(key)) size++;
+        }
+        return size;
     },
     render: function () {
         return (

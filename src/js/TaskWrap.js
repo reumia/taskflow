@@ -42,7 +42,8 @@ var Task = React.createClass({
         var categoryId = data.categoryId;
         var inlineStyleColor = {color: categories[categoryId].color};
         var inlineStyleBackgroundColor = {backgroundColor: categories[categoryId].color};
-        var stickerNodes = data.detail.map(function (sticker) {
+        var stickerNodes = Object.keys(data.detail).map(function (key) {
+            var sticker = data.detail[key];
             return (
                 <i className="sticker" data-checked={sticker.checked} data-text={sticker.text}></i>
             );

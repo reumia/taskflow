@@ -14,7 +14,7 @@ var TaskEditor = React.createClass({
             title: "",
             deploy: "",
             origin: "",
-            detail: []
+            detail: {}
         }
     },
     componentWillReceiveProps: function(nextProps){
@@ -42,15 +42,7 @@ var TaskEditor = React.createClass({
                 break;
         }
     },
-    handleAddDetailItem: function (itemString) {
-        var newDetail = this.state.detail;
-        newDetail.push({
-            "text": itemString,
-            "checked": false
-        });
-        this.setState({detail: newDetail});
-    },
-    toggleDetailItem: function (newItems) {
+    handleDetailItemChange: function (newItems) {
         this.setState({detail: newItems});
     },
     validateDate: function (string) {
@@ -70,7 +62,7 @@ var TaskEditor = React.createClass({
                 <h2 className="editor__title">Edit Task</h2>
                 <CategoryEdit categories={this.props.categories} activeCategoryConfig={this.props.activeCategoryConfig} categoryId={task.categoryId} categoryChange={this.handleCategoryChange} />
                 <BasicInfoEdit title={task.title} deploy={task.deploy} origin={task.origin} basicInfoChange={this.handleBasicInfoChange} />
-                <DetailEdit detail={task.detail} addDetailItem={this.handleAddDetailItem} detailItemClick={this.toggleDetailItem} />
+                <DetailEdit detail={task.detail} addDetailItem={this.handleDetailItemChange} detailItemClick={this.handleDetailItemChange} />
                 <div className="table">
                     <a href="#" className="button table__item">{submitStr}</a>
                     <a href="#" className="button table__item">취소</a>
