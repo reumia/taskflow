@@ -36,10 +36,11 @@
 * [jQuery.addClass()를 React에서 구현하는 방법 : Classnames 유틸리티의 활용](https://github.com/JedWatson/classnames)
 * [React 간단 매뉴얼](http://ricostacruz.com/cheatsheets/react.html)
 * [Input에 value 값을 설정할 경우 타이핑이 안되는 문제](http://facebook.github.io/react/docs/forms.html#controlled-components)
+* [React의 State와 Props](https://github.com/reumia/react-guide/blob/master/props-vs-state.md)
+    * 최대한 State는 사용하지 않아야 한다. 데이터에 대한 직접적인 관여를 하는 컴퍼넌트에만 State를 생성해라
+    * [State가 Props를 참조하는 것은 안티패턴이다](https://facebook.github.io/react/tips/props-in-getInitialState-as-anti-pattern.html)
+    * [Best Practices for Component State](http://brewhouse.io/blog/2015/03/24/best-practices-for-component-state-in-reactjs.html)
 
 #### 복기해볼 문제
 
 * [\[d609d9f\]](https://github.com/reumia/taskflow/commit/d609d9fade3d3fa5507ba6b597f0077c86434ecd) Detail Item 추가 시에 데이터가 초기화되던 이슈
-* [\[eafec4b\]]() Detail Item 체크정보 클릭하면 바로 반영되던 문제
-    * 변수 설정을 잘못함. 불필요한 데이터 변수화
-    * React는 따로 바인드해주지 않아도 각 컴퍼넌트의 State가 서로 업데이트 한다. 위에서 아래든, 아래에서 위든.
