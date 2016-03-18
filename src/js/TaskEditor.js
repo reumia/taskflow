@@ -42,7 +42,12 @@ var TaskEditor = React.createClass({
                 break;
         }
     },
-    handleDetailItemChange: function (newItems) {
+    handleDetailItemChange: function (newItem, i) {
+        var newItems = {};
+        Object.keys(this.state.detail).map(function(key){
+            newItems[key] = this.state.detail[key];
+        }.bind(this));
+        newItems[i] = newItem;
         this.setState({detail: newItems});
     },
     validateDate: function (string) {
