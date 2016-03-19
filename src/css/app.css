@@ -2342,7 +2342,7 @@ input.button--block {
     left: 50%;
     top: 20%;
     max-width: 800px;
-    min-width: 400px;
+    min-width: 300px;
     transform: translate(-50%, 0);
     background-color: #fff;
     border-radius: 4px;
