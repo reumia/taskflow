@@ -18,10 +18,15 @@ var CategoryConfig = React.createClass({
             };
             this.setState(newCategories, function () {
                 this.props.addCategories(newCategories);
+                this.clearInput();
             }.bind(this));
         } else {
             console.error("인풋을 채워주세요.");
         }
+    },
+    clearInput: function () {
+        this.refs.categoryColor.value = "";
+        this.refs.categoryName.value = "";
     },
     getGuid: function () {
         var s4 = function () {
