@@ -66,7 +66,7 @@ var CategorySelectbox = React.createClass({
             var inlineStyleColor = {color: category.color};
             var inlineStyleBackgroundColor = {backgroundColor: category.color};
             return (
-                <div className="selectbox__item" style={inlineStyleColor} key={category.color} onClick={this.handleClickItem.bind(this, key)}>
+                <div className="selectbox__item" style={inlineStyleColor} key={key} onClick={this.handleClickItem.bind(this, key)}>
                     <i className="sticker" style={inlineStyleBackgroundColor}></i> {category.name}
                 </div>
             );

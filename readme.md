@@ -25,6 +25,7 @@
     * 삭제 버튼도 우측에 추가 (input 내 margin 값 있는 상태로)
 * DetailItem : 체크정보만 Task에 바로 반영됨
 * ValidateDate : 중간에 입력될 경우도 확인
+* getObjectSize : Mixin 화
 
 #### React
 

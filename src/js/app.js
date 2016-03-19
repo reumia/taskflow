@@ -9,18 +9,30 @@ var CategoryConfig = require('./CategoryConfig');
 // TaskFlow
 var TaskFlow = React.createClass({
     loadTasksFromStorage: function () {
-        console.log("Data Loaded");
-        this.setState({data: this.props.data});
+        var myTasks = {};
+        var myCategories = {};
+        if (localStorage.length > 0) {
+            myTasks = JSON.parse(window.localStorage.tasks);
+            myCategories = JSON.parse(window.localStorage.categories);
+        }
+        this.setState({
+            tasks: myTasks,
+            categories: myCategories
+        }, function(){
+            console.log("Data Loaded", this.state);
+        }.bind(this));
     },
     getInitialState: function () {
         return {
-            data: [],
+            tasks: {},
+            categories: {},
             currentTaskKey: false,
             isCategoryConfigActivated: false
         };
     },
     componentDidMount: function () {
         this.loadTasksFromStorage();
+        setInterval(this.loadTasksFromStorage, 3000);
     },
     handleClickTask: function (node, event) {
         this.setState({currentTaskKey: node});
@@ -32,9 +44,17 @@ var TaskFlow = React.createClass({
             this.setState({isCategoryConfigActivated: true});
         }
     },
+    addCategories: function (newCategories) {
+        this.setState({
+            categories: newCategories
+        }, function () {
+            var newCategories = JSON.stringify(this.state.categories);
+            window.localStorage.setItem("categories", newCategories);
+        }.bind(this));
+    },
     render: function () {
-        var categories = this.props.categories;
-        var tasks = this.props.tasks;
+        var categories = this.state.categories;
+        var tasks = this.state.tasks;
         var taskWrapNodes = Object.keys(tasks).map(function (key) {
             var task = tasks[key];
             return (
@@ -45,22 +65,14 @@ var TaskFlow = React.createClass({
             <div className="taskflow">
                 <aside className="taskflow__aside"><TaskEditor categories={categories} tasks={tasks} currentTaskKey={this.state.currentTaskKey} activeCategoryConfig={this.toggleCategoryConfig} /></aside>
                 <section className="taskflow__body">{taskWrapNodes}</section>
-                <CategoryConfig categories={categories} isActivated={this.state.isCategoryConfigActivated} deactiveLayer={this.toggleCategoryConfig} />
+                <CategoryConfig categories={categories} isActivated={this.state.isCategoryConfigActivated} deactiveLayer={this.toggleCategoryConfig} addCategories={this.addCategories} />
             </div>
         );
     }
 });
 
-// Set Database
-var myTasks = {};
-var myCategories = {};
-if (localStorage.length > 0){
-    myTasks = JSON.parse(window.localStorage.tasks);
-    myCategories = JSON.parse(window.localStorage.categories);
-}
-
 // Render
 ReactDOM.render(
-    <TaskFlow tasks={myTasks} categories={myCategories} />,
+    <TaskFlow />,
     document.getElementById('content')
 );

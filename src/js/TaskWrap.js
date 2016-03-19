@@ -45,7 +45,7 @@ var Task = React.createClass({
         var stickerNodes = Object.keys(data.detail).map(function (key) {
             var sticker = data.detail[key];
             return (
-                <i className="sticker" data-checked={sticker.checked} data-text={sticker.text}></i>
+                <i className="sticker" key={key} data-checked={sticker.checked} data-text={sticker.text}></i>
             );
         });
         return (
