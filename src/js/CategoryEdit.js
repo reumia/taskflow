@@ -15,7 +15,6 @@ var CategoryEdit = React.createClass({
         this.toggleSelectBox(this);
     },
     handleClickItem: function (categoryId) {
-        var categoryId = parseInt(categoryId);
         this.setState({currentCategoryId: categoryId});
         this.props.categoryChange(categoryId);
         this.toggleSelectBox(this);

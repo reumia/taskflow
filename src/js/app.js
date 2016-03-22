@@ -32,7 +32,7 @@ var TaskFlow = React.createClass({
     },
     componentDidMount: function () {
         this.loadTasksFromStorage();
-        setInterval(this.loadTasksFromStorage, 3000);
+        // setInterval(this.loadTasksFromStorage, 3000);
     },
     handleClickTask: function (node, event) {
         this.setState({currentTaskKey: node});
